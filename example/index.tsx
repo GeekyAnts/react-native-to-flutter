@@ -33,7 +33,7 @@ function App() {
             height: '100%',
           }}
         >
-          <div style={{ display: 'flex', height: '94%' }}>
+          <div style={{ display: 'flex',  height: '94%' }}>
             <textarea
               style={{ flex: 1, fontFamily: 'monospace', fontSize: 14 }}
               onChange={e => setCode(e.target.value)}
@@ -41,7 +41,7 @@ function App() {
             />
             <div style={{ padding: '4px' }}></div>
             <textarea
-              style={{ flex: 1, fontFamily: 'monospace', fontSize: 14 }}
+              style={{ flex: 2, fontFamily: 'monospace', fontSize: 14 }}
               onChange={() => {}}
               value={output}
             />
