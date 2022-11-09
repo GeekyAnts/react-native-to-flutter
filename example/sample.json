@@ -1,0 +1,17 @@
+{
+  "components": {
+    "Button": {
+      "baseStyle": {
+        "fontSize": 16
+      },
+      "variants": {
+        "solid": {
+          "bg": "#ff0000"
+        },
+        "outline": {
+          "border": "1px solid #000"
+        }
+      }
+    }
+  }
+}
