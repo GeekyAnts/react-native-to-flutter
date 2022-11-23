@@ -45,20 +45,27 @@ function App() {
 
   return (
 
-    <div style={{ paddingLeft: 10, height: '100vh' }}>
-      <h2 style={{ color: "#FFFFFF" }}>NativeBase Theme to Flutter Widgets</h2>
+    <div style={{ height: '100vh' , padding:"10px"}}>
+      <h3 style={{ color: "#FFFFFF",borderBottom:"1px solid #cfcfcf",paddingBottom:"5px" }}>React Native Component to Flutter Widgets</h3>
       <div style={{ flexDirection: 'row', display: 'flex', height: '80%' }}>
         
         <div
           style={{
-            flex: 5,
+            flex: 1,
             backgroundColor: '#4d4d4d',
             padding: 8,
             justifyContent: 'center',
             height: '100%',
           }}
         >
+           
+            <p  style={{ color: "#FFFFFF" }}> Select React Native Component and add styles in the editor</p>
+            <p style={{ color: "#FFFFFF",margin:0,padding:0 }}>React Native Component</p>
+           <div style={{flex:1}}><select style={{width:"10%",marginBottom:"10px",padding:"2px"}}>
+            <option>View</option>
+            </select></div>
           <div style={{ display: 'flex', height: "calc(100vh - 120px)" }}>
+           
             <div style={{ flex: 1, height: "100%" }}>
               <Editor
                 theme="vs-dark"
