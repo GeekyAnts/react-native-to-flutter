@@ -4,20 +4,52 @@ import 'react-app-polyfill/ie11';
 import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useState } from 'react';
+import CodeMirror from '@uiw/react-codemirror';
 
-import sampleJSON from './sample.json';
+import { jsonLanguage } from '@codemirror/lang-json';
+import { javaLanguage } from '@codemirror/lang-java'
+import { sublime } from '@uiw/codemirror-theme-sublime'
+import Editor from "@monaco-editor/react";
+
+let styles: any = {
+  backgroundColor: "#ff0000",
+  minHeight: 30,
+  maxHeight: 20,
+  height: 2,
+  width: 3,
+  padding: 10,
+  borderRadius: 20,
+  color: "red"
+
+}
 
 function App() {
-  const [code, setCode] = useState(JSON.stringify(sampleJSON, null, 4));
-  const [output, setOutput] = useState('');
-
+  const [code, setCode] = useState(JSON.stringify(styles, null, 2));
+  const [output, setOutput]: any = useState('');
+  const [error,setError]:any = useState(false)
   const transpileCode = (code: string) => {
+   
     setOutput(convertNativeBaseThemeToFlutterWidgets(code));
   };
 
+  React.useEffect(() => {
+    console.log(output);
+  }, [output])
+
+  React.useEffect(()=>{
+    setOutput('')
+  },[]);
+  React.useEffect(()=>{
+    
+    if(code && !error){
+       transpileCode(code)
+    }
+  },[code]);
+
   return (
+
     <div style={{ paddingLeft: 10, height: '100vh' }}>
-      <h2 style={{ color: "#FFFFFF"}}>NativeBase Theme to Flutter Widgets</h2>
+      <h2 style={{ color: "#FFFFFF" }}>NativeBase Theme to Flutter Widgets</h2>
       <div style={{ flexDirection: 'row', display: 'flex', height: '80%' }}>
         {/* <div style={{ flex: 1, height: 600 }}>
           <div>Option 1</div>
@@ -33,18 +65,58 @@ function App() {
             height: '100%',
           }}
         >
-          <div style={{ display: 'flex',  height: '94%' }}>
-            <textarea
-              style={{ flex: 1, fontFamily: 'monospace', fontSize: 14 }}
-              onChange={e => setCode(e.target.value)}
-              value={code}
-            />
+          <div style={{ display: 'flex', height: "calc(100vh - 120px)" }}>
+            <div style={{ flex: 1, height: "100%" }}>
+              <Editor
+                theme="vs-dark"
+                defaultLanguage="json"
+                defaultValue={code}
+                onValidate={(e)=>{
+                  if(e.length>1){
+                    debugger
+                    setError(true);
+                  }
+                }}
+                onChange = {(e:string)=>{
+                  if(!error){
+                    setCode(e)
+                    setOutput('')
+                  }
+                 
+                  
+                }}
+              />
+
+              {/* <CodeMirror
+              
+                value={ code}
+                height='500px'
+                theme={sublime}
+                extensions={[jsonLanguage]}
+                onChange={e => setCode(e.target.value)}
+              /> */}
+            </div>
             <div style={{ padding: '4px' }}></div>
-            <textarea
-              style={{ flex: 2, fontFamily: 'monospace', fontSize: 14 }}
-              onChange={() => {}}
-              value={output}
-            />
+            <div style={{ flex: 1, height: "100%" }}>
+              {/* <CodeMirror
+                theme={sublime}
+                value={output}
+                height='500px'
+
+
+                extensions={[javaLanguage]}
+
+              /> */}
+              <Editor
+                theme="vs-dark"
+                defaultLanguage="dart"
+                value={output}
+                defaultValue={output}
+              />
+            </div>
+
+
+
           </div>
           <button
             style={{

@@ -8,7 +8,13 @@
     "build": "parcel build index.html"
   },
   "dependencies": {
-    "react-app-polyfill": "^1.0.0"
+    "@monaco-editor/react": "^4.4.6",
+    "@uiw/codemirror-extensions-langs": "^4.13.2",
+    "@uiw/codemirror-theme-sublime": "^4.13.2",
+    "@uiw/react-codemirror": "^4.13.2",
+    "prismjs": "^1.29.0",
+    "react-app-polyfill": "^1.0.0",
+    "react-simple-code-editor": "^0.13.1"
   },
   "alias": {
     "react": "../node_modules/react",
