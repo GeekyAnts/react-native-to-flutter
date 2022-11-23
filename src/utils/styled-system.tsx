@@ -1,18 +1,18 @@
 import { toFBorderRadius, toFColor } from "../converter/flutter-properties";
-import { colors } from "../theme/colors";
 import sizes from "../theme/size";
 
-export const getColor = (value:string,property:string) => {
-    
-    var colorList: string[] = value.split(".");
-    var color:string = colors[colorList[0]][colorList[1]];
-    color=color.replace("#","0xff");
-    return property.replace("_",color)
+export const getColor = (value:string) => {
+
+    let color=value.replace("#","0xff");
+    return color
    
   };
 
 
-
+export const toDouble = (value:any) =>{
+  
+  return parseFloat(value).toFixed(1)
+}
 
 export const getBoxConstraints =(value:string,property:string)=>{
     var token : string = value;
@@ -32,6 +32,15 @@ export const getPadding =(styles:any,paddingObject:any)=>{
   paddingObject.args[0].bottom = {...paddingObject.args[0].bottom, value: styles["paddingBottom"] ?? styles["padding"] ?? 0};
 
     return paddingObject;
+}
+
+
+export const getBorder =(styles:any,borderObject:any)=>{
+ 
+  
+  borderObject.args[0].width = {...borderObject.args[0].left, value: styles["borderWidth"] };
+
+    return borderObject;
 }
 
 export const getBorderRadius =(styles:any,object:any)=>{
