@@ -1,10 +1,18 @@
-import { getBorderRadius, getPadding } from "./utils/styled-system";
+import { getBorder, getBorderRadius, getColor, getPadding, toDouble } from "./utils/styled-system";
 
 
 let dartType = {
   double: {
     type: "double",
+    transformer:toDouble,
     value: "",
+  },
+  Color: {
+    type: "constructor",
+    class: "Color",
+    transformer:getColor,
+    value: ""
+
   },
 }
 
@@ -25,6 +33,7 @@ let flutterWidget = {
   Color: {
     type: "constructor",
     class: "Color",
+    transformer:getColor,
     value: ""
 
   },
@@ -50,6 +59,21 @@ let flutterWidget = {
     ],
     callee: "EdgeInsets",
     value: dartType.double,
+    
+  },
+
+  Border:{
+    type: "nameConstructor",
+    name: "all",
+    args: [
+      {
+        width: dartType.double,
+        
+       
+      }
+    ],
+    callee: "Border",
+
   },
 
   BorderRadius:{
@@ -122,6 +146,17 @@ let styleSystem: any = {
     },
     transformer:getBorderRadius
   },
+  borderWidth:{
+    "widget": "Container",
+    "property": "border",
+    class : flutterWidget.Border,
+    "partOf": {
+      "class": flutterWidget.BoxDecoration,
+      "property": "decoration",
+    },
+
+    transformer:getBorder,
+  },
 
   "padding": {
     "widget": "Container",
@@ -137,6 +172,8 @@ let styleSystem: any = {
     class: flutterWidget.EdgeInsets,
     transformer: getPadding,
   },
+
+  
 
   "boxShadow": {
     "widget": "Container",
@@ -181,14 +218,10 @@ try {
   dartAST = widget;
   theme = JSON.parse(theme);
   clearProperties(theme);
- 
   loopStyle(theme);
 } catch (error) {
   return error
 }
-
- 
-
   return dartAST
 
 
@@ -244,7 +277,7 @@ function clearProperties(theme: any) {
 function addProperty(myObject: any, val: any, prop: any,style:any) {
   let newProp: any;
   
-  console.log(myObject);
+  
 
 
 
@@ -259,7 +292,7 @@ function addProperty(myObject: any, val: any, prop: any,style:any) {
       }
       
     } else if (myObject.type === "nameConstructor") {
-     
+     debugger
       myObject = styleSystem[prop].transformer(style, myObject);
 
       newProp = { [styleSystem[prop].property]: myObject }
@@ -290,7 +323,7 @@ function createFlutterWidget(ast: any, c: number) {
     code += `${tab.repeat(c)}${ast.class}(\n`
   }
   c++
-debugger
+
   Object.entries(ast.properties).forEach(([k, v]: any) => {
 
     if (v.hasOwnProperty("properties")) {
@@ -306,6 +339,11 @@ debugger
         if (innerValue.class) {
 
           if (innerValue.type === "constructor") {
+           
+
+            if(innerValue.transformer){
+              innerValue.value = innerValue.transformer(innerValue.value)
+            }
             code += `${tab.repeat(c)}${innerKey}:${innerValue.class}(${innerValue.value}),\n`
           }
 
@@ -320,7 +358,14 @@ debugger
 
                 if (index == 0) {
                   args += `\n`;
+                } 
+                debugger
+
+                if(v.transformer){
+                  v.value = v.transformer(v.value);
                 }
+
+               
               
                 console.log(k, v);
                 args += `${tab.repeat(c + 1)}${k}:${v.value},\n`
@@ -330,6 +375,11 @@ debugger
               code += `${tab.repeat(c)}${innerKey}:${innerValue.callee}.${innerValue.name}(\n${innerValue.value}),\n`
             }
           } else {
+            if(innerValue.transformer){
+             
+              innerValue.value = innerValue.transformer(innerValue.value??innerValue)
+            }
+            
             code += `${tab.repeat(c)}${innerKey}:${innerValue.value ?? innerValue},\n`
           }
 
@@ -360,7 +410,7 @@ export const convertNativeBaseThemeToFlutterWidgets = (styles:any): string => {
   code='';
   try {
     let a = buildDartAST("View", styles);
-    debugger
+    
     if(a.message){
       return code = a.message;
     } else {

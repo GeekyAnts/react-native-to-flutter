@@ -4,11 +4,7 @@ import 'react-app-polyfill/ie11';
 import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useState } from 'react';
-import CodeMirror from '@uiw/react-codemirror';
 
-import { jsonLanguage } from '@codemirror/lang-json';
-import { javaLanguage } from '@codemirror/lang-java'
-import { sublime } from '@uiw/codemirror-theme-sublime'
 import Editor from "@monaco-editor/react";
 
 let styles: any = {
@@ -19,6 +15,7 @@ let styles: any = {
   width: 3,
   padding: 10,
   borderRadius: 20,
+  borderWidth:1,
   color: "red"
 
 }
@@ -51,11 +48,7 @@ function App() {
     <div style={{ paddingLeft: 10, height: '100vh' }}>
       <h2 style={{ color: "#FFFFFF" }}>NativeBase Theme to Flutter Widgets</h2>
       <div style={{ flexDirection: 'row', display: 'flex', height: '80%' }}>
-        {/* <div style={{ flex: 1, height: 600 }}>
-          <div>Option 1</div>
-          <div>Option 1</div>
-          <div>Option 1</div>
-        </div> */}
+        
         <div
           style={{
             flex: 5,
@@ -87,26 +80,11 @@ function App() {
                 }}
               />
 
-              {/* <CodeMirror
               
-                value={ code}
-                height='500px'
-                theme={sublime}
-                extensions={[jsonLanguage]}
-                onChange={e => setCode(e.target.value)}
-              /> */}
             </div>
             <div style={{ padding: '4px' }}></div>
             <div style={{ flex: 1, height: "100%" }}>
-              {/* <CodeMirror
-                theme={sublime}
-                value={output}
-                height='500px'
-
-
-                extensions={[javaLanguage]}
-
-              /> */}
+              
               <Editor
                 theme="vs-dark"
                 defaultLanguage="dart"
@@ -121,7 +99,7 @@ function App() {
           <button
             style={{
               width: '100%',
-              height: '6%',
+             
               backgroundColor: '#aae8dc',
               color: '#4a5567',
               border: 'none',
