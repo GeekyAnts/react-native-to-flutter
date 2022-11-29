@@ -1,6 +1,6 @@
 # ReactNative to Flutter Widgets Checklist
 
-This is the list of React Native Styling props, as per the official React Native reference. This checklist tracks and work as a road map. Checked Items are already ported and unchecked are yet to be ported to Flutter widgets.
+This is the list of React Native Styling props, as per the official [React Native reference](https://reactnative.dev/docs/layout-props). This checklist tracks and work as a road map. Checked Items are already ported and unchecked are yet to be ported to Flutter widgets.
 
 
 
