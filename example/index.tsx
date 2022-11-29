@@ -8,15 +8,17 @@ import { useState } from 'react';
 import Editor from "@monaco-editor/react";
 
 let styles: any = {
-  backgroundColor: "#ff0000",
-  minHeight: 30,
-  maxHeight: 20,
-  height: 2,
-  width: 3,
-  padding: 10,
-  borderRadius: 20,
-  borderWidth:1,
-  color: "red"
+
+  
+  
+  minHeight:4,
+  width:3,
+  height:4,
+  borderTopLeftRadius:3,
+  borderTopRightRadius:3,
+  borderWidth:3,
+  borderColor:"#fcfcfc",
+  padding:30
 
 }
 
@@ -39,6 +41,7 @@ function App() {
   React.useEffect(()=>{
     
     if(code && !error){
+      
        transpileCode(code)
     }
   },[code]);

@@ -1,22 +1,21 @@
-import { getBorder, getBorderRadius, getColor, getPadding, toDouble } from "./utils/styled-system";
+import { getBorder, getBorderRadius, getColor, getPadding, toDouble, toInt } from "./utils/styled-system";
 
 
-let dartType = {
+export const dartType = {
   double: {
     type: "double",
-    transformer:toDouble,
+    transformer: toDouble,
     value: "",
   },
-  Color: {
-    type: "constructor",
-    class: "Color",
-    transformer:getColor,
+  int: {
+    type: "int",
+    transformer: toInt,
     value: ""
-
   },
+
 }
 
-let flutterWidget = {
+export const flutterWidget = {
   Container: {
     type: "constructor",
     class: "Container",
@@ -33,8 +32,9 @@ let flutterWidget = {
   Color: {
     type: "constructor",
     class: "Color",
-    transformer:getColor,
-    value: ""
+    namedProp: "color",
+    value: dartType.int,
+    transformer:getColor
 
   },
   BoxConstraint: {
@@ -46,48 +46,61 @@ let flutterWidget = {
 
 
 
+
+
   EdgeInsets: {
-    type: "nameConstructor",
-    name: "only",
-    args: [
-      {
-        left: dartType.double,
-        right: dartType.double,
-        top: dartType.double,
-        bottom: dartType.double,
-      }
-    ],
-    callee: "EdgeInsets",
+    type: "constructor",
+    class: "EdgeInsets.all",
+    properties: [],
     value: dartType.double,
-    
   },
 
-  Border:{
-    type: "nameConstructor",
-    name: "all",
-    args: [
-      {
-        width: dartType.double,
-        
-       
-      }
+  RadiusCircular: {
+    type: "constructor",
+    class: "Radius.circular",
+    value: dartType.double
+  },
+
+  Border: {
+    type: "constructor",
+    class: "Border.all",
+    properties: [
+
     ],
+    value: dartType.double,
     callee: "Border",
 
   },
 
-  BorderRadius:{
-    type: "nameConstructor",
-    name: "only",
-    args: [
-      {
-        bottomLeft: dartType.double,
-        bottomRight: dartType.double,
-        topLeft: dartType.double,
-        topRight: dartType.double,
-      }
+
+
+  BorderRadius: {
+    type: "constructor",
+    class: "BorderRadius.all",
+    namedProp: "borderRadius",
+    properties: [
+
     ],
-    callee: "BorderRadius",
+    value: dartType.double,
+  },
+
+
+
+  BorderTopLeftRadius: {
+    type: "constructor",
+    class: "BorderRadius.only",
+    properties: [
+
+    ],
+    value: dartType.double,
+  },
+
+  BorderBottomLeftRadius: {
+    type: "constructor",
+    class: "BorderRadius.only",
+    properties: [
+
+    ],
     value: dartType.double,
   }
 } as const
@@ -126,6 +139,20 @@ let styleSystem: any = {
     }
   },
 
+  "width": {
+    "widget": "Container",
+    "property": "width",
+    class: dartType.double
+
+  },
+
+
+  "height": {
+    "widget": "Container",
+    "property": "height",
+    class: dartType.double
+  },
+
   "backgroundColor": {
     "widget": "Container",
     "property": "color",
@@ -144,18 +171,51 @@ let styleSystem: any = {
       "class": flutterWidget.BoxDecoration,
       "property": "decoration",
     },
-    transformer:getBorderRadius
+    transformer: getBorderRadius
   },
-  borderWidth:{
+
+  "borderTopLeftRadius": {
+    "widget": "Container",
+    "property": "borderRadius",
+    class: flutterWidget.BorderTopLeftRadius,
+    "partOf": {
+      "class": flutterWidget.BoxDecoration,
+      "property": "decoration",
+    },
+    transformer: getBorderRadius
+  },
+
+  "borderBottomLeftRadius": {
+    "widget": "Container",
+    "property": "borderRadius",
+    class: flutterWidget.BorderBottomLeftRadius,
+    "partOf": {
+      "class": flutterWidget.BoxDecoration,
+      "property": "decoration",
+    },
+    transformer: getBorderRadius
+  },
+  borderWidth: {
     "widget": "Container",
     "property": "border",
-    class : flutterWidget.Border,
+    class: flutterWidget.Border,
     "partOf": {
       "class": flutterWidget.BoxDecoration,
       "property": "decoration",
     },
 
-    transformer:getBorder,
+    transformer: getBorder,
+  },
+
+  borderColor: {
+    "widget": "Container",
+    "property": "border",
+    class: flutterWidget.Border,
+    "partOf": {
+      "class": flutterWidget.BoxDecoration,
+      "property": "decoration",
+    },
+    transformer: getBorder,
   },
 
   "padding": {
@@ -165,6 +225,19 @@ let styleSystem: any = {
     transformer: getPadding,
 
   },
+  paddingLeft: {
+    "widget": "Container",
+    "property": "padding",
+    class: flutterWidget.EdgeInsets,
+    transformer: getPadding,
+  },
+
+  paddingRight: {
+    "widget": "Container",
+    "property": "padding",
+    class: flutterWidget.EdgeInsets,
+    transformer: getPadding,
+  },
 
   paddingTop: {
     "widget": "Container",
@@ -173,7 +246,14 @@ let styleSystem: any = {
     transformer: getPadding,
   },
 
-  
+  paddingBottom: {
+    "widget": "Container",
+    "property": "padding",
+    class: flutterWidget.EdgeInsets,
+    transformer: getPadding,
+  },
+
+
 
   "boxShadow": {
     "widget": "Container",
@@ -184,17 +264,9 @@ let styleSystem: any = {
 
     }
   },
-  "width": {
-    "widget": "Container",
-    "property": "width",
-    class: dartType.double
 
-  },
-  "height": {
-    "widget": "Container",
-    "property": "height",
-    class: dartType.double
-  },
+ 
+  
 
   "fontSize": {
     "widget": "Text",
@@ -207,38 +279,56 @@ let styleSystem: any = {
 }
 
 let dartAST: any = {}
+
+
+
+
+
+
+
 function buildDartAST(component: any, theme: any) {
- 
-  
-try {
-  let widget: any = mapReactComponentToFlutterWidgets[component];
-  delete widget.properties;
-  widget.properties=[]
-  dartAST =''
-  dartAST = widget;
-  theme = JSON.parse(theme);
-  clearProperties(theme);
-  loopStyle(theme);
-} catch (error) {
-  return error
-}
-  return dartAST
 
 
+  try {
+    let widget: any = mapReactComponentToFlutterWidgets[component];
+    delete widget.properties;
+    widget.properties = []
+    dartAST = ''
+    dartAST = widget;
+    theme = JSON.parse(theme);
+
+    clearProperties(theme);
+    loopStyle(theme);
+  } catch (error) {
+    console.error(error)
+    return error
+  } finally {
+    return dartAST
+  }
+
+
+
 }
+
+
+
 
 
 function loopStyle(theme: any) {
+
   Object.entries(theme).map(([k, v]: any) => {
 
 
+
     if (styleSystem.hasOwnProperty(k)) {
+
       if (styleSystem[k].hasOwnProperty("partOf")) {
         if (dartAST["properties"]) {
 
           let newVal = { [styleSystem[k].partOf.property]: styleSystem[k].partOf.class };
           let myObject = addProperty(newVal[styleSystem[k].partOf.property], v, k, theme);
           let index = dartAST["properties"].findIndex((data: any) => data.class === myObject.class);
+
           if (index < 0) {
 
             dartAST.properties.push(myObject);
@@ -247,17 +337,15 @@ function loopStyle(theme: any) {
 
         }
       } else {
+      
+        let newVal = { ...styleSystem[k].class };
+        let myObject = addProperty(newVal, v, k, theme);
+        let index = dartAST["properties"].findIndex((data: any) => data.namedProp === myObject.namedProp);
+       
+        if (index < 0) {
 
-
-        let newVal = { [styleSystem[k].property]: styleSystem[k].class };
-
-        let myObject = addProperty(newVal[styleSystem[k].property], v, k, theme);
-
-
-
-        dartAST.properties.push(myObject);
-
-
+          dartAST.properties.push(myObject);
+        }
       }
     }
 
@@ -274,36 +362,41 @@ function clearProperties(theme: any) {
   });
 }
 
-function addProperty(myObject: any, val: any, prop: any,style:any) {
+function addProperty(myObject: any, val: any, prop: any, style: any) {
+ 
   let newProp: any;
-  
-  
-
-
-
-
   if (styleSystem.hasOwnProperty(prop)) {
     if (myObject.type === "constructor") {
-      newProp = { [styleSystem[prop].property]: styleSystem[prop].class }
-      newProp[styleSystem[prop].property] = { ...newProp[styleSystem[prop].property], value: val };
-
-      if(newProp[styleSystem[prop].property].type ==="nameConstructor"){
-         addProperty(newProp[styleSystem[prop].property],val,prop,style)
+     
+     
+      newProp = { ...styleSystem[prop].class , namedProp:styleSystem[prop].property}
+      if( typeof newProp.value === "object"){
+        newProp.value = { ...newProp.value, value: val };
+      } else {
+        newProp.value = val;
       }
-      
-    } else if (myObject.type === "nameConstructor") {
-     debugger
-      myObject = styleSystem[prop].transformer(style, myObject);
+      debugger
+      if (newProp.properties) {
+        styleSystem[prop]?.transformer(style, newProp);
 
-      newProp = { [styleSystem[prop].property]: myObject }
+      }
 
     } else {
-      
-      newProp = { [styleSystem[prop].property]: {...myObject,value:val} }
+
+      newProp = { ...myObject, value: val, namedProp: styleSystem[prop].property }
     }
   }
-  if (myObject.properties) {
-    myObject.properties.push(newProp);
+  if (newProp.class !== myObject.class) {
+    if(styleSystem[prop].hasOwnProperty("partOf")){
+      
+      let index = myObject["properties"].findIndex((data: any) => data.class === myObject.class);
+      if (index < 0) {
+        myObject.properties.push(newProp);
+      }
+    } else {
+      myObject = newProp;
+    }
+    
   } else {
     myObject = newProp
   }
@@ -324,7 +417,7 @@ function createFlutterWidget(ast: any, c: number) {
   }
   c++
 
-  Object.entries(ast.properties).forEach(([k, v]: any) => {
+  Object.entries(ast.properties).forEach(([, v]: any) => {
 
     if (v.hasOwnProperty("properties")) {
       createFlutterWidget(v, c);
@@ -332,67 +425,79 @@ function createFlutterWidget(ast: any, c: number) {
 
 
     } else {
-      Object.entries(v).forEach(([innerKey, innerValue]: any) => {
 
-        console.log(innerKey, innerValue)
+    
+      let innerValue = v;
+      let innerKey
 
-        if (innerValue.class) {
 
-          if (innerValue.type === "constructor") {
-           
+      
 
+      if (innerValue.class) {
+        if (innerValue.type === "constructor") {
+          if (innerValue.hasOwnProperty("properties")) {
+            createFlutterWidget(innerValue, c);
+
+          }
+
+
+          if (innerValue.value.transformer) {
+            innerValue.value.value = innerValue.value.transformer(innerValue.value.value)
+          } else {
             if(innerValue.transformer){
               innerValue.value = innerValue.transformer(innerValue.value)
             }
-            code += `${tab.repeat(c)}${innerKey}:${innerValue.class}(${innerValue.value}),\n`
           }
-
-
-        } else {
-          if (innerValue.type === "nameConstructor") {
-
-            let args: string = ''
-
-            if (innerValue.args) {
-              Object.entries(innerValue.args[0]).forEach(([k, v]: any, index: number) => {
-
-                if (index == 0) {
-                  args += `\n`;
-                } 
-                debugger
-
-                if(v.transformer){
-                  v.value = v.transformer(v.value);
-                }
-
-               
-              
-                console.log(k, v);
-                args += `${tab.repeat(c + 1)}${k}:${v.value},\n`
-              })
-              code += `${tab.repeat(c)}${innerKey}:${innerValue.callee}.${innerValue.name}(${args}${tab.repeat(c)}),\n`
-            } else {
-              code += `${tab.repeat(c)}${innerKey}:${innerValue.callee}.${innerValue.name}(\n${innerValue.value}),\n`
-            }
-          } else {
-            if(innerValue.transformer){
-             
-              innerValue.value = innerValue.transformer(innerValue.value??innerValue)
-            }
-            
-            code += `${tab.repeat(c)}${innerKey}:${innerValue.value ?? innerValue},\n`
-          }
-
-
+          code += `${tab.repeat(c)}${innerValue.namedProp}:${innerValue.class}(${innerValue.value.value ?? innerValue.value}),\n`
         }
 
-      })
+
+      } else {
+        if (innerValue.type === "nameConstructor") {
+
+          let args: string = ''
+
+          if (innerValue.args) {
+            Object.entries(innerValue.args[0]).forEach(([k, v]: any, index: number) => {
+
+              if (index == 0) {
+                args += `\n`;
+              }
+
+
+              if (v.transformer) {
+                v.value = v.transformer(v.value);
+              }
+
+
+
+              
+              args += `${tab.repeat(c + 1)}${k}:${v.value},\n`
+            })
+            code += `${tab.repeat(c)}${innerKey}:${innerValue.callee}.${innerValue.name}(${args}${tab.repeat(c)}),\n`
+          } else {
+            code += `${tab.repeat(c)}${innerKey}:${innerValue.callee}.${innerValue.name}(\n${innerValue.value}),\n`
+          }
+        } else {
+
+          if (innerValue.transformer) {
+
+            innerValue.value = innerValue.transformer(innerValue.value ?? innerValue)
+          }
+
+          code += `${tab.repeat(c)}${innerValue.namedProp}:${innerValue.value ?? innerValue},\n`
+        }
+
+
+      }
+
+
 
     }
-    console.log(k)
+    
   });
 
-  console.log(code)
+ 
 }
 
 
@@ -406,26 +511,26 @@ function createFlutterWidget(ast: any, c: number) {
 
 
 
-export const convertNativeBaseThemeToFlutterWidgets = (styles:any): string => {
-  code='';
+export const convertNativeBaseThemeToFlutterWidgets = (styles: any): string => {
+  code = '';
   try {
     let a = buildDartAST("View", styles);
-    
-    if(a.message){
+
+    if (a.message) {
       return code = a.message;
     } else {
-      createFlutterWidget(a,count)
+      createFlutterWidget(a, count)
     }
-  
 
 
-  console.log(a)
 
-  code += ');\n'
+    console.log(a)
+
+    code += ');\n'
   } catch (error) {
     code = error as string
   }
-  
+
 
   return code;
 }
