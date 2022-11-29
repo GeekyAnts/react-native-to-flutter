@@ -5,108 +5,108 @@ This is the list of React Native Styling props, as per the official React Native
 #### Layout Props
 ---
 
-[ ] alignContent
+- [ ] alignContent
 
-[ ] alignItems
+- [ ] alignItems
 
-[ ] alignSelf
+- [ ] alignSelf
 
-[ ] aspectRatio
+- [ ] aspectRatio
 
-[ ] borderBottomWidth
+- [ ] borderBottomWidth
 
-[ ] borderEndWidth
+- [ ] borderEndWidth
 
-[ ] borderLeftWidth
+- [ ] borderLeftWidth
 
-[ ] borderRightWidth
+- [ ] borderRightWidth
 
-[ ] borderStartWidth
+- [ ] borderStartWidth
 
-[ ] borderTopWidth
+- [ ] borderTopWidth
 
-[ ] borderWidth
+- [ ] borderWidth
 
-[ ] bottom
+- [ ] bottom
 
-[ ] direction
+- [ ] direction
 
-[ ] display
+- [ ] display
 
-[ ] end
+- [ ] end
 
-[ ] flex
+- [ ] flex
 
-[ ] flexBasis
+- [ ] flexBasis
 
-[ ] flexDirection
+- [ ] flexDirection
 
-[ ] flexGrow
+- [ ] flexGrow
 
-[ ] flexShrink
+- [ ] flexShrink
 
-[ ] flexWrap
+- [ ] flexWrap
 
-[ ] height
+- [ ] height
 
-[ ] justifyContent
+- [ ] justifyContent
 
-[ ] left
+- [ ] left
 
-[ ] margin
+- [ ] margin
 
-[ ] marginBottom
+- [ ] marginBottom
 
-[ ] marginEnd
+- [ ] marginEnd
 
-[ ] marginHorizontal
+- [ ] marginHorizontal
 
-[ ] marginLeft
+- [ ] marginLeft
 
-[ ] marginRight
+- [ ] marginRight
 
-[ ] marginStart
+- [ ] marginStart
 
-[ ] marginTop
+- [ ] marginTop
 
-[ ] marginVertical
+- [ ] marginVertical
 
-[ ] maxHeight
+- [ ] maxHeight
 
-[ ] maxWidth
+- [ ] maxWidth
 
-[ ] minHeight
+- [ ] minHeight
 
-[ ] minWidth
+- [ ] minWidth
 
-[ ] overflow
+- [ ] overflow
 
-[ ] padding
+- [ ] padding
 
-[ ] paddingBottom
+- [ ] paddingBottom
 
-[ ] paddingEnd
+- [ ] paddingEnd
 
-[ ] paddingHorizontal
+- [ ] paddingHorizontal
 
-[ ] paddingLeft
+- [ ] paddingLeft
 
-[ ] paddingRight
+- [ ] paddingRight
 
-[ ] paddingStart
+- [ ] paddingStart
 
-[ ] paddingTop
+- [ ] paddingTop
 
-[ ] paddingVertical
+- [ ] paddingVertical
 
-[ ] position
+- [ ] position
 
-[ ] right
+- [ ] right
 
-[ ] start
+- [ ] start
 
-[ ] top
+- [ ] top
 
-[ ] width
+- [ ] width
 
-[ ] zIndex 
+- [ ] zIndex 
