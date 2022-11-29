@@ -1,112 +1,248 @@
 # ReactNative to Flutter Widgets Checklist
 
-This is the list of React Native Styling props, as per the official React Native reference. This checklist tracks and work as a road map. Checked Items are already ported and unchecked are yet to be ported to Flutter widgets.
+This is the list of React Native Styling props, as per the official [React Native reference](https://reactnative.dev/docs/layout-props). This checklist tracks and work as a road map. Checked Items are already ported and unchecked are yet to be ported to Flutter widgets.
 
-#### Layout Props
----
 
-[ ] alignContent
 
-[ ] alignItems
+##### Prop List (*click to expand*)
+<details>
+<summary> Layout Props </summary>
 
-[ ] alignSelf
+- [ ] alignContent
 
-[ ] aspectRatio
+- [ ] alignItems
 
-[ ] borderBottomWidth
+- [ ] alignSelf
 
-[ ] borderEndWidth
+- [ ] aspectRatio
 
-[ ] borderLeftWidth
+- [ ] borderBottomWidth
 
-[ ] borderRightWidth
+- [ ] borderEndWidth
 
-[ ] borderStartWidth
+- [ ] borderLeftWidth
 
-[ ] borderTopWidth
+- [ ] borderRightWidth
 
-[ ] borderWidth
+- [ ] borderStartWidth
 
-[ ] bottom
+- [ ] borderTopWidth
 
-[ ] direction
+- [ ] borderWidth
 
-[ ] display
+- [ ] bottom
 
-[ ] end
+- [ ] direction
 
-[ ] flex
+- [ ] display
 
-[ ] flexBasis
+- [ ] end
 
-[ ] flexDirection
+- [ ] flex
 
-[ ] flexGrow
+- [ ] flexBasis
 
-[ ] flexShrink
+- [ ] flexDirection
 
-[ ] flexWrap
+- [ ] flexGrow
 
-[ ] height
+- [ ] flexShrink
 
-[ ] justifyContent
+- [ ] flexWrap
 
-[ ] left
+- [ ] height
 
-[ ] margin
+- [ ] justifyContent
 
-[ ] marginBottom
+- [ ] left
 
-[ ] marginEnd
+- [ ] margin
 
-[ ] marginHorizontal
+- [ ] marginBottom
 
-[ ] marginLeft
+- [ ] marginEnd
 
-[ ] marginRight
+- [ ] marginHorizontal
 
-[ ] marginStart
+- [ ] marginLeft
 
-[ ] marginTop
+- [ ] marginRight
 
-[ ] marginVertical
+- [ ] marginStart
 
-[ ] maxHeight
+- [ ] marginTop
 
-[ ] maxWidth
+- [ ] marginVertical
 
-[ ] minHeight
+- [ ] maxHeight
 
-[ ] minWidth
+- [ ] maxWidth
 
-[ ] overflow
+- [ ] minHeight
 
-[ ] padding
+- [ ] minWidth
 
-[ ] paddingBottom
+- [ ] overflow
 
-[ ] paddingEnd
+- [ ] padding
 
-[ ] paddingHorizontal
+- [ ] paddingBottom
 
-[ ] paddingLeft
+- [ ] paddingEnd
 
-[ ] paddingRight
+- [ ] paddingHorizontal
 
-[ ] paddingStart
+- [ ] paddingLeft
 
-[ ] paddingTop
+- [ ] paddingRight
 
-[ ] paddingVertical
+- [ ] paddingStart
 
-[ ] position
+- [ ] paddingTop
 
-[ ] right
+- [ ] paddingVertical
 
-[ ] start
+- [ ] position
 
-[ ] top
+- [ ] right
 
-[ ] width
+- [ ] start
 
-[ ] zIndex 
+- [ ] top
+
+- [ ] width
+
+- [ ] zIndex 
+
+</details>
+
+<details>
+<summary> Text Props </summary>
+
+- [ ] fontFamily
+
+- [ ] fontSize
+
+- [ ] fontStyle
+
+- [ ] fontWeight
+
+- [ ] includeFontPaddingAndroid
+
+- [ ] fontVariant
+
+- [ ] letterSpacing
+
+- [ ] lineHeight
+
+- [ ] textAlign
+
+- [ ] textAlignVerticalAndroid
+
+- [ ] textDecorationColoriOS
+
+- [ ] textDecorationLine
+
+- [ ] textDecorationStyleiOS
+
+- [ ] textShadowColor
+
+- [ ] textShadowOffset
+
+- [ ] textShadowRadius
+
+- [ ] textTransform
+
+- [ ] writingDirection
+
+</details>
+
+<details>
+<summary> View Style Props </summary>
+
+- [ ] backfaceVisibility
+ 
+- [ ] backgroundColor
+ 
+- [ ] borderBottomColor
+ 
+- [ ] borderBottomEndRadius
+ 
+- [ ] borderBottomLeftRadius
+ 
+- [ ] borderBottomRightRadius
+ 
+- [ ] borderBottomStartRadius
+ 
+- [ ] borderBottomWidth
+ 
+- [ ] borderColor
+ 
+- [ ] borderEndColor
+ 
+- [ ] borderLeftColor
+ 
+- [ ] borderLeftWidth
+ 
+- [ ] borderRadius
+ 
+- [ ] borderRightColor
+ 
+- [ ] borderRightWidth
+ 
+- [ ] borderStartColor
+ 
+- [ ] borderStyle
+ 
+- [ ] borderTopColor
+ 
+- [ ] borderTopEndRadius
+ 
+- [ ] borderTopLeftRadius
+ 
+- [ ] borderTopRightRadius
+ 
+- [ ] borderTopStartRadius
+ 
+- [ ] borderTopWidth
+ 
+- [ ] borderWidth
+ 
+- [ ] elevationAndroid
+ 
+- [ ] opacity
+</details>
+
+<details>
+
+<summary> Image Styles Props </summary>
+
+- [ ] backfaceVisibility
+ 
+- [ ] backgroundColor
+ 
+- [ ] borderBottomLeftRadius
+ 
+- [ ] borderBottomRightRadius
+ 
+- [ ] borderColor
+ 
+- [ ] borderRadius
+ 
+- [ ] borderTopLeftRadius
+ 
+- [ ] borderTopRightRadius
+ 
+- [ ] borderWidth
+ 
+- [ ] opacity
+ 
+- [ ] overflow
+ 
+- [ ] overlayColorAndroid
+ 
+- [ ] resizeMode
+ 
+- [ ] tintColor
+
+</details>
