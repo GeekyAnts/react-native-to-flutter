@@ -1,9 +1,8 @@
 # ReactNative to Flutter Widgets Checklist
 
 This is the list of React Native Styling props, as per the official React Native reference. This checklist tracks and work as a road map. Checked Items are already ported and unchecked are yet to be ported to Flutter widgets.
-
-#### Layout Props
----
+<details>
+<summary> Layout Props </summary>
 
 - [ ] alignContent
 
@@ -110,3 +109,136 @@ This is the list of React Native Styling props, as per the official React Native
 - [ ] width
 
 - [ ] zIndex 
+
+</details>
+
+<details>
+<summary> Text Props </summary>
+
+- [ ] fontFamily
+
+- [ ] fontSize
+
+- [ ] fontStyle
+
+- [ ] fontWeight
+
+- [ ] includeFontPaddingAndroid
+
+- [ ] fontVariant
+
+- [ ] letterSpacing
+
+- [ ] lineHeight
+
+- [ ] textAlign
+
+- [ ] textAlignVerticalAndroid
+
+- [ ] textDecorationColoriOS
+
+- [ ] textDecorationLine
+
+- [ ] textDecorationStyleiOS
+
+- [ ] textShadowColor
+
+- [ ] textShadowOffset
+
+- [ ] textShadowRadius
+
+- [ ] textTransform
+
+- [ ] writingDirection
+
+</details>
+
+<details>
+<summary> View Style Props </summary>
+
+- [ ] backfaceVisibility
+ 
+- [ ] backgroundColor
+ 
+- [ ] borderBottomColor
+ 
+- [ ] borderBottomEndRadius
+ 
+- [ ] borderBottomLeftRadius
+ 
+- [ ] borderBottomRightRadius
+ 
+- [ ] borderBottomStartRadius
+ 
+- [ ] borderBottomWidth
+ 
+- [ ] borderColor
+ 
+- [ ] borderEndColor
+ 
+- [ ] borderLeftColor
+ 
+- [ ] borderLeftWidth
+ 
+- [ ] borderRadius
+ 
+- [ ] borderRightColor
+ 
+- [ ] borderRightWidth
+ 
+- [ ] borderStartColor
+ 
+- [ ] borderStyle
+ 
+- [ ] borderTopColor
+ 
+- [ ] borderTopEndRadius
+ 
+- [ ] borderTopLeftRadius
+ 
+- [ ] borderTopRightRadius
+ 
+- [ ] borderTopStartRadius
+ 
+- [ ] borderTopWidth
+ 
+- [ ] borderWidth
+ 
+- [ ] elevationAndroid
+ 
+- [ ] opacity
+</details>
+
+<details>
+
+<summary> Image Styles Props </summary>
+
+- [ ] backfaceVisibility
+ 
+- [ ] backgroundColor
+ 
+- [ ] borderBottomLeftRadius
+ 
+- [ ] borderBottomRightRadius
+ 
+- [ ] borderColor
+ 
+- [ ] borderRadius
+ 
+- [ ] borderTopLeftRadius
+ 
+- [ ] borderTopRightRadius
+ 
+- [ ] borderWidth
+ 
+- [ ] opacity
+ 
+- [ ] overflow
+ 
+- [ ] overlayColorAndroid
+ 
+- [ ] resizeMode
+ 
+- [ ] tintColor
+
+</details>
