@@ -14,11 +14,24 @@ let styles: any = {
   minHeight:4,
   width:3,
   height:4,
-  borderTopLeftRadius:3,
-  borderTopRightRadius:3,
+  borderRadius:4,
   borderWidth:3,
   borderColor:"#fcfcfc",
-  padding:30
+  paddingLeft:30,
+  paddingRight:40,
+  paddingBottom:50,
+  paddingTop:40,
+  maxWidth:30,
+  minWidth:50,
+  maxHeight:50,
+  margin:30,
+  borderBottomWidth:1,
+  borderTopWidth:3,
+  borderLeftWidth:4,
+  borderRightWidth:5,
+  flexDirection:"column",
+  alignContent:"space-between",
+  alignItems:"stretch"
 
 }
 
