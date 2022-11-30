@@ -10,29 +10,29 @@ This is the list of React Native Styling props, as per the official [React Nativ
 
 - [x] alignContent
 
-- [ ] alignItems
+- [x] alignItems
 
 - [ ] alignSelf
 
 - [ ] aspectRatio
 
-- [ ] borderBottomWidth
+- [x] borderBottomWidth
 
 - [ ] borderEndWidth
 
-- [ ] borderLeftWidth
+- [x] borderLeftWidth
 
-- [ ] borderRightWidth
+- [x] borderRightWidth
 
 - [ ] borderStartWidth
 
-- [ ] borderTopWidth
+- [x] borderTopWidth
 
-- [ ] borderWidth
+- [x] borderWidth
 
 - [ ] bottom
 
-- [ ] direction
+- [x] direction
 
 - [ ] display
 
@@ -50,55 +50,55 @@ This is the list of React Native Styling props, as per the official [React Nativ
 
 - [ ] flexWrap
 
-- [ ] height
+- [x] height
 
-- [ ] justifyContent
+- [x] justifyContent
 
 - [ ] left
 
-- [ ] margin
+- [x] margin
 
-- [ ] marginBottom
+- [x] marginBottom
 
-- [ ] marginEnd
+- [x] marginEnd
 
 - [ ] marginHorizontal
 
-- [ ] marginLeft
+- [x] marginLeft
 
-- [ ] marginRight
+- [x] marginRight
 
 - [ ] marginStart
 
-- [ ] marginTop
+- [x] marginTop
 
 - [ ] marginVertical
 
-- [ ] maxHeight
+- [x] maxHeight
 
-- [ ] maxWidth
+- [x] maxWidth
 
-- [ ] minHeight
+- [x] minHeight
 
-- [ ] minWidth
+- [x] minWidth
 
 - [ ] overflow
 
-- [ ] padding
+- [x] padding
 
-- [ ] paddingBottom
+- [x] paddingBottom
 
-- [ ] paddingEnd
+- [x] paddingEnd
 
 - [ ] paddingHorizontal
 
-- [ ] paddingLeft
+- [x] paddingLeft
 
-- [ ] paddingRight
+- [x] paddingRight
 
 - [ ] paddingStart
 
-- [ ] paddingTop
+- [x] paddingTop
 
 - [ ] paddingVertical
 
@@ -110,7 +110,7 @@ This is the list of React Native Styling props, as per the official [React Nativ
 
 - [ ] top
 
-- [ ] width
+- [x] width
 
 - [ ] zIndex 
 
@@ -162,51 +162,51 @@ This is the list of React Native Styling props, as per the official [React Nativ
 
 - [ ] backfaceVisibility
  
-- [ ] backgroundColor
+- [x] backgroundColor
  
-- [ ] borderBottomColor
+- [x] borderBottomColor
  
 - [ ] borderBottomEndRadius
  
-- [ ] borderBottomLeftRadius
+- [x] borderBottomLeftRadius
  
-- [ ] borderBottomRightRadius
+- [x] borderBottomRightRadius
  
 - [ ] borderBottomStartRadius
  
-- [ ] borderBottomWidth
+- [x] borderBottomWidth
  
-- [ ] borderColor
+- [x] borderColor
  
 - [ ] borderEndColor
  
-- [ ] borderLeftColor
+- [x] borderLeftColor
  
-- [ ] borderLeftWidth
+- [x] borderLeftWidth
  
-- [ ] borderRadius
+- [x] borderRadius
  
-- [ ] borderRightColor
+- [x] borderRightColor
  
-- [ ] borderRightWidth
+- [x] borderRightWidth
  
 - [ ] borderStartColor
  
 - [ ] borderStyle
  
-- [ ] borderTopColor
+- [x] borderTopColor
  
 - [ ] borderTopEndRadius
  
-- [ ] borderTopLeftRadius
+- [x] borderTopLeftRadius
  
-- [ ] borderTopRightRadius
+- [x] borderTopRightRadius
  
 - [ ] borderTopStartRadius
  
-- [ ] borderTopWidth
+- [x] borderTopWidth
  
-- [ ] borderWidth
+- [x] borderWidth
  
 - [ ] elevationAndroid
  
