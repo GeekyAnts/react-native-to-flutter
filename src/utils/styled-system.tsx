@@ -1,6 +1,8 @@
 import { dartType, flutterWidget } from "..";
 import { toFBorderRadius, toFColor } from "../converter/flutter-properties";
 import sizes from "../theme/size";
+import { toCamel } from "./camel";
+
 
 export const getColor = (value: string) => {
   let color = value.replace("#", "0xff");
@@ -36,7 +38,7 @@ export const getBoxConstraints = (value: string, property: string) => {
 export const getPadding = (styles: any, object: any) => {
   object.properties = [];
   if(styles.hasOwnProperty("padding")){
-    debugger
+    
       delete object.properties
   }
   else {
@@ -84,6 +86,57 @@ export const getPadding = (styles: any, object: any) => {
 }
 
 
+export const getMargin= (styles: any, object: any) => {
+  object.properties = [];
+  if(styles.hasOwnProperty("margin")){
+   
+      delete object.properties
+  }
+  else {
+    
+    object.class = "EdgeInsets.only"
+    if (styles.hasOwnProperty("marginLeft")) {
+     
+      let widget: any = dartType.double;
+      widget.value = styles["marginLeft"];
+      widget = {...widget,namedProp:"left"}
+      object.properties.push(widget)
+
+    }
+
+    if (styles.hasOwnProperty("marginRight")) {
+     
+      let widget: any = dartType.double;
+      widget.value = styles["marginRight"];
+      widget = {...widget,namedProp:"right"}
+      object.properties.push(widget)
+
+    }
+
+    if (styles.hasOwnProperty("marginTop")) {
+     
+      let widget: any = dartType.double;
+      widget.value = styles["marginTop"];
+      widget = {...widget,namedProp:"top"}
+      object.properties.push(widget)
+
+    }
+
+    if (styles.hasOwnProperty("marginBottom")) {
+     
+      let widget: any = dartType.double;
+      widget.value = styles["marginBottom"];
+      widget = {...widget,namedProp:"bottom"}
+      object.properties.push(widget)
+
+    }
+    
+  }
+
+  return object;
+}
+
+
 export const getBorder = (styles: any, object: any) => {
 
   object.properties = [];
@@ -94,16 +147,128 @@ export const getBorder = (styles: any, object: any) => {
     widget.value = styles["borderWidth"];
     widget = {...widget,namedProp:"width"}
     object.properties.push(widget)
+
+    if(styles.hasOwnProperty("borderColor")) {
+      let widget: any = flutterWidget.Color;
+      widget.value = styles["borderColor"];
+      object.properties.push(widget)
+    }
     
-  } if(styles.hasOwnProperty("borderColor")) {
-    let widget: any = flutterWidget.Color;
-    widget.value = styles["borderColor"];
+  } 
+  if(styles.hasOwnProperty("borderBottomWidth")){
+    
+    object.properties = [];
+    object.class = "Border";
+    let widget : any = flutterWidget.BorderBottomWidth;
+    widget.properties = [];
+    widget = {...widget,namedProp:"bottom"}
+    let prop : any = dartType.double;
+     prop.value=  styles["borderBottomWidth"];
+     prop = {...prop,namedProp:"width"}
+    
+    if(styles.hasOwnProperty("borderColor")) {
+      let color: any = flutterWidget.Color;
+      color.value = styles["borderColor"];
+      widget.properties.push(color)
+    }
+    widget.properties.push(prop);
+    object.properties.push(widget)
+  }
+  
+  if(styles.hasOwnProperty("borderTopWidth")){
+    
+   
+    object.class = "Border";
+    let widget : any = flutterWidget.BorderBottomWidth;
+    widget.properties = [];
+    widget = {...widget,namedProp:"top"}
+    let prop : any = dartType.double;
+     prop.value=  styles["borderTopWidth"];
+     prop = {...prop,namedProp:"width"}
+    
+    if(styles.hasOwnProperty("borderColor")) {
+      let color: any = flutterWidget.Color;
+      color.value = styles["borderColor"];
+      widget.properties.push(color)
+    }
+    widget.properties.push(prop);
+    object.properties.push(widget)
+  }
+
+  if(styles.hasOwnProperty("borderLeftWidth")){
+    
+   
+    object.class = "Border";
+    let widget : any = flutterWidget.BorderBottomWidth;
+    widget.properties = [];
+    widget = {...widget,namedProp:"left"}
+    let prop : any = dartType.double;
+     prop.value=  styles["borderLeftWidth"];
+     prop = {...prop,namedProp:"width"}
+    
+    if(styles.hasOwnProperty("borderColor")) {
+      let color: any = flutterWidget.Color;
+      color.value = styles["borderColor"];
+      widget.properties.push(color)
+    }
+    widget.properties.push(prop);
+    object.properties.push(widget)
+  }
+
+  if(styles.hasOwnProperty("borderRightWidth")){
+    
+   
+    object.class = "Border";
+    let widget : any = flutterWidget.BorderBottomWidth;
+    widget.properties = [];
+    widget = {...widget,namedProp:"right"}
+    let prop : any = dartType.double;
+     prop.value=  styles["borderRightWidth"];
+     prop = {...prop,namedProp:"width"}
+    
+    if(styles.hasOwnProperty("borderColor")) {
+      let color: any = flutterWidget.Color;
+      color.value = styles["borderColor"];
+      widget.properties.push(color)
+    }
+    widget.properties.push(prop);
     object.properties.push(widget)
   }
   
 
   return object;
 }
+
+
+export const getAlignmentAxis= (styles:any,object:any) =>{
+
+  let layoutWidget : any = flutterWidget.Row;
+  //layoutWidget.properties = [];
+  if(styles.hasOwnProperty("flexDirection")){
+    if(styles.flexDirection === "column"){
+      
+      layoutWidget = flutterWidget.Column;
+      
+    }
+  }
+  debugger
+  object = {...object,value : object.value.replace(/flex-/,"")}
+ 
+  object = {...object,value: toCamel(object.value)}
+  object = {...object,value : object.value.replace(/-/,"")}
+
+  let index = layoutWidget.properties.findIndex((data: any) => (data.value === object.value));
+  if(index < 0 ){
+    layoutWidget.properties.push(object)
+  }
+  
+  layoutWidget["namedProp"] = "child"; 
+
+  return layoutWidget
+}
+
+
+
 
 
 
