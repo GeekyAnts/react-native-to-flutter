@@ -1,4 +1,5 @@
-import { getBorder, getBorderRadius, getColor, getPadding, toDouble, toInt } from "./utils/styled-system";
+
+import {  getAlignmentAxis, getBorder, getBorderRadius, getColor, getMargin, getPadding, toDouble, toInt } from "./utils/styled-system";
 
 
 export const dartType = {
@@ -22,6 +23,33 @@ export const flutterWidget = {
     properties: []
   },
 
+  MainAxisAlignment :{
+    type:"enum",
+    class : "MainAxisAlignment",
+    value : "",
+
+  },
+
+  CrossAxisAlignment :{
+    type:"enum",
+    class : "CrossAxisAlignment",
+    value : "",
+
+  },
+
+  Column :{
+    type: "constructor",
+    class: "Column",
+    properties: []
+  },
+
+
+  Row :{
+    type: "constructor",
+    class: "Row",
+    properties: []
+  },
+
   BoxDecoration: {
     type: "constructor",
     class: "BoxDecoration",
@@ -34,13 +62,13 @@ export const flutterWidget = {
     class: "Color",
     namedProp: "color",
     value: dartType.int,
-    transformer:getColor
+    transformer: getColor
 
   },
-  BoxConstraint: {
+  BoxConstraints: {
     type: "constructor",
-    namedProp: "constraint",
-    class: "BoxConstraint",
+    namedProp: "constraints",
+    class: "BoxConstraints",
     properties: []
   },
 
@@ -59,6 +87,43 @@ export const flutterWidget = {
     type: "constructor",
     class: "Radius.circular",
     value: dartType.double
+  },
+
+
+  BorderBottomWidth: {
+    type: "constructor",
+    class: "BorderSide",
+    properties: [
+
+    ],
+    value: dartType.double,
+  },
+
+  BorderTopWidth: {
+    type: "constructor",
+    class: "BorderSide",
+    properties: [
+
+    ],
+    value: dartType.double,
+  },
+  
+  BorderLeftWidth: {
+    type: "constructor",
+    class: "BorderSide",
+    properties: [
+
+    ],
+    value: dartType.double,
+  },
+
+  BorderRightWidth: {
+    type: "constructor",
+    class: "BorderSide",
+    properties: [
+
+    ],
+    value: dartType.double,
   },
 
   Border: {
@@ -94,6 +159,11 @@ export const flutterWidget = {
     ],
     value: dartType.double,
   },
+  
+
+
+
+  
 
   BorderBottomLeftRadius: {
     type: "constructor",
@@ -125,17 +195,38 @@ let styleSystem: any = {
     "property": "minHeight",
     class: dartType.double,
     "partOf": {
-      "class": flutterWidget.BoxConstraint,
-      "property": "constraint",
+      "class": flutterWidget.BoxConstraints,
+      "property": "constraints",
     }
   },
+
+  "minWidth": {
+    widget: "Container",
+    "property": "minWidth",
+    class: dartType.double,
+    "partOf": {
+      "class": flutterWidget.BoxConstraints,
+      "property": "constraints",
+    }
+  },
+
   "maxHeight": {
     widget: "Container",
     "property": "maxHeight",
     class: dartType.double,
     "partOf": {
-      "class": flutterWidget.BoxConstraint,
-      "property": "constraint",
+      "class": flutterWidget.BoxConstraints,
+      "property": "constraints",
+    }
+  },
+
+  "maxWidth": {
+    widget: "Container",
+    "property": "maxWidth",
+    class: dartType.double,
+    "partOf": {
+      "class": flutterWidget.BoxConstraints,
+      "property": "constraints",
     }
   },
 
@@ -185,6 +276,17 @@ let styleSystem: any = {
     transformer: getBorderRadius
   },
 
+  "borderTopRightRadius": {
+    "widget": "Container",
+    "property": "borderRadius",
+    class: flutterWidget.BorderTopLeftRadius,
+    "partOf": {
+      "class": flutterWidget.BoxDecoration,
+      "property": "decoration",
+    },
+    transformer: getBorderRadius
+  },
+
   "borderBottomLeftRadius": {
     "widget": "Container",
     "property": "borderRadius",
@@ -204,6 +306,50 @@ let styleSystem: any = {
       "property": "decoration",
     },
 
+    transformer: getBorder,
+  },
+
+  borderBottomWidth :{
+    "widget": "Container",
+    "property": "border",
+    class: flutterWidget.Border,
+    "partOf": {
+      "class": flutterWidget.BoxDecoration,
+      "property": "decoration",
+    },
+    transformer: getBorder,
+  },
+
+  borderTopWidth :{
+    "widget": "Container",
+    "property": "border",
+    class: flutterWidget.Border,
+    "partOf": {
+      "class": flutterWidget.BoxDecoration,
+      "property": "decoration",
+    },
+    transformer: getBorder,
+  },
+
+  borderRightWidth :{
+    "widget": "Container",
+    "property": "border",
+    class: flutterWidget.Border,
+    "partOf": {
+      "class": flutterWidget.BoxDecoration,
+      "property": "decoration",
+    },
+    transformer: getBorder,
+  },
+
+  borderLeftWidth :{
+    "widget": "Container",
+    "property": "border",
+    class: flutterWidget.Border,
+    "partOf": {
+      "class": flutterWidget.BoxDecoration,
+      "property": "decoration",
+    },
     transformer: getBorder,
   },
 
@@ -253,6 +399,61 @@ let styleSystem: any = {
     transformer: getPadding,
   },
 
+  margin: {
+    "widget": "Container",
+    "property": "margin",
+    class: flutterWidget.EdgeInsets,
+    transformer: getMargin,
+  },
+
+  marginLeft: {
+    "widget": "Container",
+    "property": "margin",
+    class: flutterWidget.EdgeInsets,
+    transformer: getMargin,
+  },
+
+  marginRight: {
+    "widget": "Container",
+    "property": "margin",
+    class: flutterWidget.EdgeInsets,
+    transformer: getMargin,
+  },
+
+  marginTop: {
+    "widget": "Container",
+    "property": "margin",
+    class: flutterWidget.EdgeInsets,
+    transformer: getMargin,
+  },
+
+  marginBottom: {
+    "widget": "Container",
+    "property": "margin",
+    class: flutterWidget.EdgeInsets,
+    transformer: getMargin,
+  },
+
+  alignContent:{
+    widget:"Column",
+    "property": "mainAxisAlignment",
+    class : flutterWidget.MainAxisAlignment,
+    transformer : getAlignmentAxis
+  },
+
+  alignItems :{
+    widget:"Column",
+    "property": "crossAxisAlignment",
+    class : flutterWidget.CrossAxisAlignment,
+    transformer : getAlignmentAxis
+  },
+
+justifyContent :{
+    widget:"Column",
+    "property": "mainAxisAlignment",
+    class : flutterWidget.MainAxisAlignment,
+    transformer : getAlignmentAxis
+  },
 
 
   "boxShadow": {
@@ -265,8 +466,8 @@ let styleSystem: any = {
     }
   },
 
- 
-  
+
+
 
   "fontSize": {
     "widget": "Text",
@@ -298,7 +499,9 @@ function buildDartAST(component: any, theme: any) {
     theme = JSON.parse(theme);
 
     clearProperties(theme);
+   
     loopStyle(theme);
+   
   } catch (error) {
     console.error(error)
     return error
@@ -309,6 +512,9 @@ function buildDartAST(component: any, theme: any) {
 
 
 }
+
+
+
 
 
 
@@ -327,7 +533,7 @@ function loopStyle(theme: any) {
 
           let newVal = { [styleSystem[k].partOf.property]: styleSystem[k].partOf.class };
           let myObject = addProperty(newVal[styleSystem[k].partOf.property], v, k, theme);
-          let index = dartAST["properties"].findIndex((data: any) => data.class === myObject.class);
+          let index = dartAST["properties"].findIndex((data: any) => { return data.class === myObject.class });
 
           if (index < 0) {
 
@@ -337,11 +543,11 @@ function loopStyle(theme: any) {
 
         }
       } else {
-      
+
         let newVal = { ...styleSystem[k].class };
         let myObject = addProperty(newVal, v, k, theme);
         let index = dartAST["properties"].findIndex((data: any) => data.namedProp === myObject.namedProp);
-       
+
         if (index < 0) {
 
           dartAST.properties.push(myObject);
@@ -363,40 +569,52 @@ function clearProperties(theme: any) {
 }
 
 function addProperty(myObject: any, val: any, prop: any, style: any) {
- 
+
   let newProp: any;
+  
   if (styleSystem.hasOwnProperty(prop)) {
-    if (myObject.type === "constructor") {
-     
-     
-      newProp = { ...styleSystem[prop].class , namedProp:styleSystem[prop].property}
-      if( typeof newProp.value === "object"){
+    if (myObject.type === "constructor" || myObject.type === "enum") {
+
+
+      newProp = { ...styleSystem[prop].class, namedProp: styleSystem[prop].property }
+      if (typeof newProp.value === "object") {
         newProp.value = { ...newProp.value, value: val };
       } else {
         newProp.value = val;
       }
-      debugger
-      if (newProp.properties) {
-        styleSystem[prop]?.transformer(style, newProp);
-
+      
+   
+      if( styleSystem[prop]?.transformer){
+      
+       // newProp.properties = []
+        newProp = styleSystem[prop]?.transformer(style, newProp);
       }
+     
+
+      
 
     } else {
 
       newProp = { ...myObject, value: val, namedProp: styleSystem[prop].property }
     }
   }
+ 
   if (newProp.class !== myObject.class) {
-    if(styleSystem[prop].hasOwnProperty("partOf")){
-      
-      let index = myObject["properties"].findIndex((data: any) => data.class === myObject.class);
+    if (styleSystem[prop].hasOwnProperty("partOf")) {
+
+      let index = myObject["properties"].findIndex((data: any) => {
+       
+       
+          return data.class === newProp.class;
+        
+      });
       if (index < 0) {
         myObject.properties.push(newProp);
       }
     } else {
       myObject = newProp;
     }
-    
+
   } else {
     myObject = newProp
   }
@@ -409,32 +627,37 @@ let code: string = ""
 let tab: string = '\t';
 let count: number = 0;
 function createFlutterWidget(ast: any, c: number) {
-
+  
   if (ast.hasOwnProperty("namedProp")) {
-    code += `${tab.repeat(c)}${ast.namedProp}:${ast.class}(\n`
+     if(ast.type === "constructor"){
+      code += `${tab.repeat(c)}${ast.namedProp}:${ast.class}(\n`
+     } else if (ast.type === "Array"){
+      code += `${tab.repeat(c)}${ast.namedProp}:[\n`
+     }
+    
   } else {
     code += `${tab.repeat(c)}${ast.class}(\n`
   }
   c++
 
   Object.entries(ast.properties).forEach(([, v]: any) => {
-
-    if (v.hasOwnProperty("properties")) {
+    
+    if (v.hasOwnProperty("properties") || v.hasOwnProperty("widgets")) {
       createFlutterWidget(v, c);
       code += `${tab.repeat(c)}),\n`
 
 
     } else {
 
-    
+
       let innerValue = v;
       let innerKey
 
 
-      
+
 
       if (innerValue.class) {
-        if (innerValue.type === "constructor") {
+        if (innerValue.type === "constructor" || innerValue.type === "enum" ) {
           if (innerValue.hasOwnProperty("properties")) {
             createFlutterWidget(innerValue, c);
 
@@ -444,12 +667,22 @@ function createFlutterWidget(ast: any, c: number) {
           if (innerValue.value.transformer) {
             innerValue.value.value = innerValue.value.transformer(innerValue.value.value)
           } else {
-            if(innerValue.transformer){
+            if (innerValue.transformer) {
               innerValue.value = innerValue.transformer(innerValue.value)
             }
           }
-          code += `${tab.repeat(c)}${innerValue.namedProp}:${innerValue.class}(${innerValue.value.value ?? innerValue.value}),\n`
-        }
+          if(innerValue.type === "constructor"){
+            // Build class when its constrictor
+            /// for eg Color(0xffffffff)
+            
+            code += `${tab.repeat(c)}${innerValue.namedProp}:${innerValue.class}(${innerValue.value.value ?? innerValue.value}),\n`
+          } else if(innerValue.type ==="enum"){
+            // Build class when its constrictor
+            /// for eg MainAxisAlignment.center
+            code += `${tab.repeat(c)}${innerValue.namedProp}:${innerValue.class}.${innerValue.value.value ?? innerValue.value},\n`
+          }
+         
+        } 
 
 
       } else {
@@ -471,7 +704,7 @@ function createFlutterWidget(ast: any, c: number) {
 
 
 
-              
+
               args += `${tab.repeat(c + 1)}${k}:${v.value},\n`
             })
             code += `${tab.repeat(c)}${innerKey}:${innerValue.callee}.${innerValue.name}(${args}${tab.repeat(c)}),\n`
@@ -494,10 +727,10 @@ function createFlutterWidget(ast: any, c: number) {
 
 
     }
-    
+
   });
 
- 
+
 }
 
 
