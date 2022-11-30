@@ -8,7 +8,7 @@ This is the list of React Native Styling props, as per the official [React Nativ
 <details>
 <summary> Layout Props </summary>
 
-- [ ] alignContent
+- [x] alignContent
 
 - [ ] alignItems
 
