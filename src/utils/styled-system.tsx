@@ -2,6 +2,7 @@ import { dartType, flutterWidget } from "..";
 import { toFBorderRadius, toFColor } from "../converter/flutter-properties";
 import sizes from "../theme/size";
 import { toCamel } from "./camel";
+import { pushPropToWidget } from "./pushPropToWidget";
 
 
 export const getColor = (value: string) => {
@@ -40,51 +41,31 @@ export const getBorder = (styles: any, object: any) => {
   object.properties = [];
   if (styles.hasOwnProperty("borderWidth")) {
 
-   
+
     let widget: any = dartType.double;
     widget.value = styles["borderWidth"];
-    widget = {...widget,namedProp:"width"}
+    widget = { ...widget, namedProp: "width" }
     object.properties.push(widget)
 
-    if(styles.hasOwnProperty("borderColor")) {
+    if (styles.hasOwnProperty("borderColor")) {
       let widget: any = flutterWidget.Color;
       widget.value = styles["borderColor"];
       object.properties.push(widget)
     }
-    
-  } 
-  if(styles.hasOwnProperty("borderBottomWidth")){
-    
+
+  }
+  if (styles.hasOwnProperty("borderBottomWidth")) {
+
     object.properties = [];
     object.class = "Border";
-    let widget : any = flutterWidget.BorderBottomWidth;
+    let widget: any = flutterWidget.BorderBottomWidth;
     widget.properties = [];
-    widget = {...widget,namedProp:"bottom"}
-    let prop : any = dartType.double;
-     prop.value=  styles["borderBottomWidth"];
-     prop = {...prop,namedProp:"width"}
-    
-    if(styles.hasOwnProperty("borderColor")) {
-      let color: any = flutterWidget.Color;
-      color.value = styles["borderColor"];
-      widget.properties.push(color)
-    }
-    widget.properties.push(prop);
-    object.properties.push(widget)
-  }
-  
-  if(styles.hasOwnProperty("borderTopWidth")){
-    
-   
-    object.class = "Border";
-    let widget : any = flutterWidget.BorderBottomWidth;
-    widget.properties = [];
-    widget = {...widget,namedProp:"top"}
-    let prop : any = dartType.double;
-     prop.value=  styles["borderTopWidth"];
-     prop = {...prop,namedProp:"width"}
-    
-    if(styles.hasOwnProperty("borderColor")) {
+    widget = { ...widget, namedProp: "bottom" }
+    let prop: any = dartType.double;
+    prop.value = styles["borderBottomWidth"];
+    prop = { ...prop, namedProp: "width" }
+
+    if (styles.hasOwnProperty("borderColor")) {
       let color: any = flutterWidget.Color;
       color.value = styles["borderColor"];
       widget.properties.push(color)
@@ -93,18 +74,18 @@ export const getBorder = (styles: any, object: any) => {
     object.properties.push(widget)
   }
 
-  if(styles.hasOwnProperty("borderLeftWidth")){
-    
-   
+  if (styles.hasOwnProperty("borderTopWidth")) {
+
+
     object.class = "Border";
-    let widget : any = flutterWidget.BorderBottomWidth;
+    let widget: any = flutterWidget.BorderBottomWidth;
     widget.properties = [];
-    widget = {...widget,namedProp:"left"}
-    let prop : any = dartType.double;
-     prop.value=  styles["borderLeftWidth"];
-     prop = {...prop,namedProp:"width"}
-    
-    if(styles.hasOwnProperty("borderColor")) {
+    widget = { ...widget, namedProp: "top" }
+    let prop: any = dartType.double;
+    prop.value = styles["borderTopWidth"];
+    prop = { ...prop, namedProp: "width" }
+
+    if (styles.hasOwnProperty("borderColor")) {
       let color: any = flutterWidget.Color;
       color.value = styles["borderColor"];
       widget.properties.push(color)
@@ -113,18 +94,18 @@ export const getBorder = (styles: any, object: any) => {
     object.properties.push(widget)
   }
 
-  if(styles.hasOwnProperty("borderRightWidth")){
-    
-   
+  if (styles.hasOwnProperty("borderLeftWidth")) {
+
+
     object.class = "Border";
-    let widget : any = flutterWidget.BorderBottomWidth;
+    let widget: any = flutterWidget.BorderBottomWidth;
     widget.properties = [];
-    widget = {...widget,namedProp:"right"}
-    let prop : any = dartType.double;
-     prop.value=  styles["borderRightWidth"];
-     prop = {...prop,namedProp:"width"}
-    
-    if(styles.hasOwnProperty("borderColor")) {
+    widget = { ...widget, namedProp: "left" }
+    let prop: any = dartType.double;
+    prop.value = styles["borderLeftWidth"];
+    prop = { ...prop, namedProp: "width" }
+
+    if (styles.hasOwnProperty("borderColor")) {
       let color: any = flutterWidget.Color;
       color.value = styles["borderColor"];
       widget.properties.push(color)
@@ -132,45 +113,70 @@ export const getBorder = (styles: any, object: any) => {
     widget.properties.push(prop);
     object.properties.push(widget)
   }
-  
+
+  if (styles.hasOwnProperty("borderRightWidth")) {
+
+
+    object.class = "Border";
+    let widget: any = flutterWidget.BorderBottomWidth;
+    widget.properties = [];
+    widget = { ...widget, namedProp: "right" }
+    let prop: any = dartType.double;
+    prop.value = styles["borderRightWidth"];
+    prop = { ...prop, namedProp: "width" }
+
+    if (styles.hasOwnProperty("borderColor")) {
+      let color: any = flutterWidget.Color;
+      color.value = styles["borderColor"];
+      widget.properties.push(color)
+    }
+    widget.properties.push(prop);
+    object.properties.push(widget)
+  }
+
 
   return object;
 }
 
 
-export const getAlignmentAxis= (styles:any,object:any) =>{
+export const getAlignmentAxis = (styles: any, object: any, ast: any) => {
 
-  let layoutWidget : any = flutterWidget.Row;
+  let layoutWidget: any = flutterWidget.Row;
   //layoutWidget.properties = [];
-  if(styles.hasOwnProperty("flexDirection")){
-    if(styles.flexDirection === "column"){
-      
+  if (styles.hasOwnProperty("flexDirection")) {
+    if (styles.flexDirection === "column") {
+
       layoutWidget = flutterWidget.Column;
-      
+
     }
   }
 
-  object = {...object,value : object.value.replace(/flex-/,"")}
- 
-  object = {...object,value: toCamel(object.value)}
-  object = {...object,value : object.value.replace(/-/,"")}
+  object = { ...object, value: object.value.replace(/flex-/, "") }
+
+  object = { ...object, value: toCamel(object.value) }
+  object = { ...object, value: object.value.replace(/-/, "") }
 
   let index = layoutWidget.properties.findIndex((data: any) => (data.class === object.class));
-  if(index>-1){
-    
-    layoutWidget.properties.splice(index,1)
+  if (index > -1) {
+
+    layoutWidget.properties.splice(index, 1)
   }
-  
-   
-  
-    layoutWidget.properties.push(object)
 
-  
-  layoutWidget["namedProp"] = "child"; 
 
-  return layoutWidget
+
+  layoutWidget.properties.push(object)
+
+
+  layoutWidget["namedProp"] = "child";
+
+
+  pushPropToWidget(ast, layoutWidget,flutterWidget.Container.class);
+
+
+  object = ast;
+
+  return { nested: true, object }
 }
-
 
 
 
@@ -179,18 +185,18 @@ export const getAlignmentAxis= (styles:any,object:any) =>{
 
 export const getBorderRadius = (styles: any, object: any) => {
 
-   object.properties = [];
+  object.properties = [];
   if (styles.hasOwnProperty("borderRadius")) {
 
     delete object.properties
   } else {
     object.nameProp = "BorderRadius.only"
     if (styles.hasOwnProperty("borderTopLeftRadius")) {
-     
+
       let widget: any = flutterWidget.RadiusCircular;
       widget.value.value = styles["borderTopLeftRadius"];
-      
-      widget = {...widget,namedProp:"topLeft"}
+
+      widget = { ...widget, namedProp: "topLeft" }
       object.properties.push(widget)
 
     }
@@ -215,7 +221,7 @@ export const getBorderRadius = (styles: any, object: any) => {
 
       let widget: any = flutterWidget.RadiusCircular;
       widget.value.value = styles["borderBottomLeftRadius"];
-      widget = {...widget,namedProp:"bottomLeft"}
+      widget = { ...widget, namedProp: "bottomLeft" }
       object.properties.push(widget)
     }
   }
@@ -224,48 +230,48 @@ export const getBorderRadius = (styles: any, object: any) => {
   return object;
 }
 
-export const getPositioned = (styles: any, object: any,ast?:any) => {
- object.properties = [];
-  if(styles.hasOwnProperty("position")){
-    if(styles["position"] === "absolute"){
+export const getPositioned = (styles: any, object: any, ast?: any) => {
+  object.properties = [];
+  if (styles.hasOwnProperty("position")) {
+    if (styles["position"] === "absolute") {
       console.log(object)
       console.log(ast)
       ast["namedProp"] = "child";
-     
+
       delete object.namedProp
       debugger
-      if(styles.top){
-        let top : any = dartType.double;
-      
-      
-        top = {...top,"namedProp":"top",value:styles.top};
+      if (styles.top) {
+        let top: any = dartType.double;
+
+
+        top = { ...top, "namedProp": "top", value: styles.top };
         object.properties.push(top)
-       
+
       }
-      if(styles.bottom){
-        let bottom : any = dartType.double;
-        bottom = {...bottom,"namedProp":"bottom",value:styles.bottom};
+      if (styles.bottom) {
+        let bottom: any = dartType.double;
+        bottom = { ...bottom, "namedProp": "bottom", value: styles.bottom };
         object.properties.push(bottom)
-        
+
       }
 
-      if(styles.left){
-        let left : any = dartType.double;
-        
-        left = {...left,"namedProp":"left",value:styles.left};
+      if (styles.left) {
+        let left: any = dartType.double;
+
+        left = { ...left, "namedProp": "left", value: styles.left };
         object.properties.push(left)
-        
+
       }
-      if(styles.right){
-        let right : any = dartType.double;
-       
-        
-        right = {...right,"namedProp":"right",value:styles.right};
+      if (styles.right) {
+        let right: any = dartType.double;
+
+
+        right = { ...right, "namedProp": "right", value: styles.right };
         object.properties.push(right)
-        
+
       }
       object.properties.push(ast);
-      return { nested:true ,object};
+      return { nested: true, object };
     }
   } else {
     return object;
@@ -894,3 +900,4 @@ export const propConfig = {
 
 
 export type StyledPropConfig = typeof propConfig;
+

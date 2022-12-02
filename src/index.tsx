@@ -2,6 +2,7 @@
 import {  getAlignmentAxis, getBorder, getBorderRadius, getColor, getPositioned, toDouble, toInt } from "./utils/styled-system";
 import { getMargin } from "./utils/getMargin";
 import { getPadding } from "./utils/getPadding";
+import { pushPropToWidget } from "./utils/pushPropToWidget";
 
 
 export const dartType = {
@@ -509,6 +510,7 @@ function buildDartAST(component: any, theme: any) {
     widget.properties = []
     dartAST = ''
     dartAST = widget;
+    
     theme = JSON.parse(theme);
 
     clearProperties(theme);
@@ -546,17 +548,25 @@ function loopStyle(theme: any) {
 
           let newVal = { [styleSystem[k].partOf.property]: styleSystem[k].partOf.class };
           let myObject = addProperty(newVal[styleSystem[k].partOf.property], v, k, theme);
+          let widget = styleSystem[k].widget;
           if(myObject.nested){
-            dartAST = myObject.object;
-          }else {
-            let index = dartAST["properties"].findIndex((data: any) => { return data.class === myObject.class });
-
-            if (index < 0) {
-  
-              dartAST.properties.push(myObject);
+              dartAST = myObject.object;
+            } else {
+              pushPropToWidget(dartAST,myObject,widget);
             }
+          
+          debugger
+          // if(myObject.nested){
+          //   dartAST = myObject.object;
+          // }else {
+          //   let index = dartAST["properties"].findIndex((data: any) => { return data.class === myObject.class });
+
+          //   if (index < 0) {
   
-          }
+          //     dartAST.properties.push(myObject);
+          //   }
+  
+          // }
          
 
         }
@@ -564,18 +574,25 @@ function loopStyle(theme: any) {
 
         let newVal = { ...styleSystem[k].class };
         let myObject = addProperty(newVal, v, k, theme);
-       
+        let widget = styleSystem[k].widget;
         if(myObject.nested){
           dartAST = myObject.object;
-        }else {
-          let index = dartAST["properties"].findIndex((data: any) => { return data.namedProp === myObject.namedProp });
-
-          if (index < 0) {
-
-            dartAST.properties.push(myObject);
-          }
-
+        } else {
+          pushPropToWidget(dartAST,myObject,widget);
         }
+       
+       
+        // if(myObject.nested){
+        //   dartAST = myObject.object;
+        // }else {
+        //   let index = dartAST["properties"].findIndex((data: any) => { return data.namedProp === myObject.namedProp });
+
+        //   if (index < 0) {
+
+        //     dartAST.properties.push(myObject);
+        //   }
+
+        // }
         
       }
     }
@@ -594,7 +611,7 @@ function clearProperties(theme: any) {
 }
 
 function addProperty(myObject: any, val: any, prop: any, style: any) {
-
+ 
   let newProp: any;
   
   if (styleSystem.hasOwnProperty(prop)) {
