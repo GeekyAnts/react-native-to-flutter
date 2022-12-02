@@ -17,7 +17,7 @@ let styles: any = {
   borderRadius:4,
   borderWidth:3,
   borderColor:"#fcfcfc",
-  paddingLeft:30,
+  paddingHorizontal:30,
   paddingRight:40,
   paddingBottom:50,
   paddingTop:40,
@@ -31,7 +31,12 @@ let styles: any = {
   borderRightWidth:5,
   flexDirection:"column",
   alignContent:"space-between",
-  alignItems:"stretch"
+  alignItems:"stretch",
+  position:"absolute",
+  top:10,
+  right:20,
+  bottom:30,
+  left:40,
 
 }
 
@@ -44,12 +49,19 @@ function App() {
     setOutput(convertNativeBaseThemeToFlutterWidgets(code));
   };
 
+  function handleEditorWillMount(monaco) {
+    // here is the monaco instance
+    // do something before editor is mounted
+    monaco.languages.typescript.javascriptDefaults.setEagerModelSync(true);
+  }
+
   React.useEffect(() => {
     console.log(output);
   }, [output])
 
   React.useEffect(()=>{
     setOutput('')
+
   },[]);
   React.useEffect(()=>{
     
@@ -87,6 +99,7 @@ function App() {
                 theme="vs-dark"
                 defaultLanguage="json"
                 defaultValue={code}
+                beforeMount = {handleEditorWillMount}
                 onValidate={(e)=>{
                   if(e.length>1){
                     debugger

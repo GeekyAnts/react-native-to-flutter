@@ -35,108 +35,6 @@ export const getBoxConstraints = (value: string, property: string) => {
 }
 
 
-export const getPadding = (styles: any, object: any) => {
-  object.properties = [];
-  if(styles.hasOwnProperty("padding")){
-    
-      delete object.properties
-  }
-  else {
-    
-    object.class = "EdgeInsets.only"
-    if (styles.hasOwnProperty("paddingLeft")) {
-     
-      let widget: any = dartType.double;
-      widget.value = styles["paddingLeft"];
-      widget = {...widget,namedProp:"left"}
-      object.properties.push(widget)
-
-    }
-
-    if (styles.hasOwnProperty("paddingRight")) {
-     
-      let widget: any = dartType.double;
-      widget.value = styles["paddingRight"];
-      widget = {...widget,namedProp:"right"}
-      object.properties.push(widget)
-
-    }
-
-    if (styles.hasOwnProperty("paddingTop")) {
-     
-      let widget: any = dartType.double;
-      widget.value = styles["paddingTop"];
-      widget = {...widget,namedProp:"top"}
-      object.properties.push(widget)
-
-    }
-
-    if (styles.hasOwnProperty("paddingBottom")) {
-     
-      let widget: any = dartType.double;
-      widget.value = styles["paddingBottom"];
-      widget = {...widget,namedProp:"bottom"}
-      object.properties.push(widget)
-
-    }
-    
-  }
-
-  return object;
-}
-
-
-export const getMargin= (styles: any, object: any) => {
-  object.properties = [];
-  if(styles.hasOwnProperty("margin")){
-   
-      delete object.properties
-  }
-  else {
-    
-    object.class = "EdgeInsets.only"
-    if (styles.hasOwnProperty("marginLeft")) {
-     
-      let widget: any = dartType.double;
-      widget.value = styles["marginLeft"];
-      widget = {...widget,namedProp:"left"}
-      object.properties.push(widget)
-
-    }
-
-    if (styles.hasOwnProperty("marginRight")) {
-     
-      let widget: any = dartType.double;
-      widget.value = styles["marginRight"];
-      widget = {...widget,namedProp:"right"}
-      object.properties.push(widget)
-
-    }
-
-    if (styles.hasOwnProperty("marginTop")) {
-     
-      let widget: any = dartType.double;
-      widget.value = styles["marginTop"];
-      widget = {...widget,namedProp:"top"}
-      object.properties.push(widget)
-
-    }
-
-    if (styles.hasOwnProperty("marginBottom")) {
-     
-      let widget: any = dartType.double;
-      widget.value = styles["marginBottom"];
-      widget = {...widget,namedProp:"bottom"}
-      object.properties.push(widget)
-
-    }
-    
-  }
-
-  return object;
-}
-
-
 export const getBorder = (styles: any, object: any) => {
 
   object.properties = [];
@@ -251,16 +149,22 @@ export const getAlignmentAxis= (styles:any,object:any) =>{
       
     }
   }
-  debugger
+
   object = {...object,value : object.value.replace(/flex-/,"")}
  
   object = {...object,value: toCamel(object.value)}
   object = {...object,value : object.value.replace(/-/,"")}
 
-  let index = layoutWidget.properties.findIndex((data: any) => (data.value === object.value));
-  if(index < 0 ){
-    layoutWidget.properties.push(object)
+  let index = layoutWidget.properties.findIndex((data: any) => (data.class === object.class));
+  if(index>-1){
+    
+    layoutWidget.properties.splice(index,1)
   }
+  
+   
+  
+    layoutWidget.properties.push(object)
+
   
   layoutWidget["namedProp"] = "child"; 
 
@@ -318,6 +222,54 @@ export const getBorderRadius = (styles: any, object: any) => {
 
 
   return object;
+}
+
+export const getPositioned = (styles: any, object: any,ast?:any) => {
+ object.properties = [];
+  if(styles.hasOwnProperty("position")){
+    if(styles["position"] === "absolute"){
+      console.log(object)
+      console.log(ast)
+      ast["namedProp"] = "child";
+     
+      delete object.namedProp
+      debugger
+      if(styles.top){
+        let top : any = dartType.double;
+      
+      
+        top = {...top,"namedProp":"top",value:styles.top};
+        object.properties.push(top)
+       
+      }
+      if(styles.bottom){
+        let bottom : any = dartType.double;
+        bottom = {...bottom,"namedProp":"bottom",value:styles.bottom};
+        object.properties.push(bottom)
+        
+      }
+
+      if(styles.left){
+        let left : any = dartType.double;
+        
+        left = {...left,"namedProp":"left",value:styles.left};
+        object.properties.push(left)
+        
+      }
+      if(styles.right){
+        let right : any = dartType.double;
+       
+        
+        right = {...right,"namedProp":"right",value:styles.right};
+        object.properties.push(right)
+        
+      }
+      object.properties.push(ast);
+      return { nested:true ,object};
+    }
+  } else {
+    return object;
+  }
 }
 
 export const layout = {

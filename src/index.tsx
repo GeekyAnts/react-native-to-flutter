@@ -1,5 +1,7 @@
 
-import {  getAlignmentAxis, getBorder, getBorderRadius, getColor, getMargin, getPadding, toDouble, toInt } from "./utils/styled-system";
+import {  getAlignmentAxis, getBorder, getBorderRadius, getColor, getPositioned, toDouble, toInt } from "./utils/styled-system";
+import { getMargin } from "./utils/getMargin";
+import { getPadding } from "./utils/getPadding";
 
 
 export const dartType = {
@@ -47,6 +49,11 @@ export const flutterWidget = {
   Row :{
     type: "constructor",
     class: "Row",
+    properties: []
+  },
+  Positioned:{
+    type: "constructor",
+    class: "Positioned",
     properties: []
   },
 
@@ -455,6 +462,12 @@ justifyContent :{
     transformer : getAlignmentAxis
   },
 
+position :{
+  widget:"Positioned",
+  class: flutterWidget.Positioned,
+  transformer : getPositioned
+},
+
 
   "boxShadow": {
     "widget": "Container",
@@ -533,25 +546,37 @@ function loopStyle(theme: any) {
 
           let newVal = { [styleSystem[k].partOf.property]: styleSystem[k].partOf.class };
           let myObject = addProperty(newVal[styleSystem[k].partOf.property], v, k, theme);
-          let index = dartAST["properties"].findIndex((data: any) => { return data.class === myObject.class });
+          if(myObject.nested){
+            dartAST = myObject.object;
+          }else {
+            let index = dartAST["properties"].findIndex((data: any) => { return data.class === myObject.class });
 
-          if (index < 0) {
-
-            dartAST.properties.push(myObject);
+            if (index < 0) {
+  
+              dartAST.properties.push(myObject);
+            }
+  
           }
-
+         
 
         }
       } else {
 
         let newVal = { ...styleSystem[k].class };
         let myObject = addProperty(newVal, v, k, theme);
-        let index = dartAST["properties"].findIndex((data: any) => data.namedProp === myObject.namedProp);
+       
+        if(myObject.nested){
+          dartAST = myObject.object;
+        }else {
+          let index = dartAST["properties"].findIndex((data: any) => { return data.namedProp === myObject.namedProp });
 
-        if (index < 0) {
+          if (index < 0) {
 
-          dartAST.properties.push(myObject);
+            dartAST.properties.push(myObject);
+          }
+
         }
+        
       }
     }
 
@@ -587,7 +612,11 @@ function addProperty(myObject: any, val: any, prop: any, style: any) {
       if( styleSystem[prop]?.transformer){
       
        // newProp.properties = []
-        newProp = styleSystem[prop]?.transformer(style, newProp);
+        newProp = styleSystem[prop]?.transformer(style, newProp,dartAST);
+      
+        if(newProp.nested){
+          return newProp;
+        }
       }
      
 
@@ -608,6 +637,7 @@ function addProperty(myObject: any, val: any, prop: any, style: any) {
           return data.class === newProp.class;
         
       });
+
       if (index < 0) {
         myObject.properties.push(newProp);
       }
