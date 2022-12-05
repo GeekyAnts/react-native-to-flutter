@@ -11,7 +11,6 @@ let styles: any = {
 
   position:"absolute",
   flexGrow:4,
-  flex:1,
   minHeight:4,
  width:3,
   height:4,
