@@ -1,5 +1,5 @@
 
-import {  getAlignmentAxis, getBorder, getBorderRadius, getColor, getPositioned, toDouble, toInt } from "./utils/styled-system";
+import {  getAlignmentAxis, getBorder, getBorderRadius, getColor, getExpanded, getPositioned, toDouble, toInt } from "./utils/styled-system";
 import { getMargin } from "./utils/getMargin";
 import { getPadding } from "./utils/getPadding";
 import { pushPropToWidget } from "./utils/pushPropToWidget";
@@ -31,6 +31,12 @@ export const flutterWidget = {
     class : "MainAxisAlignment",
     value : "",
 
+  },
+
+  Flex :{
+    type:"constructor",
+    class:"Flex",
+    properties:[]
   },
 
   CrossAxisAlignment :{
@@ -77,6 +83,14 @@ export const flutterWidget = {
     type: "constructor",
     namedProp: "constraints",
     class: "BoxConstraints",
+    properties: []
+  },
+
+
+  Expanded:{
+    type:"constructor",
+    class:"Expanded",
+    value:dartType.double,
     properties: []
   },
 
@@ -469,6 +483,42 @@ position :{
   transformer : getPositioned
 },
 
+flexGrow:{
+  widget:"Expanded",
+  class:flutterWidget.Expanded,
+  transformer:getExpanded,
+},
+
+flex:{
+  widget:"Flex",
+  class: flutterWidget.Expanded,
+  transformer:getExpanded
+},
+
+top:{
+  widget:"Positioned",
+  property:"top",
+  class:dartType.double,
+},
+
+bottom:{
+  widget:"Positioned",
+  property:"bottom",
+  class:dartType.double,
+},
+
+right:{
+  widget:"Positioned",
+  property:"right",
+  class:dartType.double,
+},
+
+left:{
+  widget:"Positioned",
+  property:"left",
+  class:dartType.double,
+},
+
 
   "boxShadow": {
     "widget": "Container",
@@ -540,7 +590,7 @@ function loopStyle(theme: any) {
   Object.entries(theme).map(([k, v]: any) => {
 
 
-
+    
     if (styleSystem.hasOwnProperty(k)) {
 
       if (styleSystem[k].hasOwnProperty("partOf")) {
@@ -555,7 +605,7 @@ function loopStyle(theme: any) {
               pushPropToWidget(dartAST,myObject,widget);
             }
           
-          debugger
+       
           // if(myObject.nested){
           //   dartAST = myObject.object;
           // }else {
@@ -571,10 +621,11 @@ function loopStyle(theme: any) {
 
         }
       } else {
-
+       
         let newVal = { ...styleSystem[k].class };
         let myObject = addProperty(newVal, v, k, theme);
         let widget = styleSystem[k].widget;
+       
         if(myObject.nested){
           dartAST = myObject.object;
         } else {

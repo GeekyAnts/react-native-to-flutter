@@ -1,6 +1,6 @@
 
 export function pushPropToWidget(ast: any, layoutWidget: any,widget:string) {
-  debugger;
+  debugger
 if(layoutWidget.nested){
   ast = layoutWidget.object;
   return ast;
@@ -12,16 +12,25 @@ if(layoutWidget.nested){
     }
 
   } else {
-    Object.entries(ast.properties).forEach(([, v]: any) => {
-    
+    searchWidgetAndPush(ast.properties);
+  }
+}
+  
+
+  function searchWidgetAndPush(prop:any) {
+    Object.entries(prop).forEach(([, v]: any) => {
+      debugger;
       if (v.class === widget) {
         let index = v.properties.findIndex((data: any) => (data.namedProp === layoutWidget.namedProp));
         if (index < 0) {
           v.properties.push(layoutWidget);
         }
+      } else {
+        if(v.hasOwnProperty("properties")){
+          searchWidgetAndPush(v.properties);
+        }
+       
       }
     });
   }
-}
-  
 }
