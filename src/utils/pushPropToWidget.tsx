@@ -1,6 +1,6 @@
 
 export function pushPropToWidget(ast: any, layoutWidget: any,widget:string) {
-  debugger
+  
 if(layoutWidget.nested){
   ast = layoutWidget.object;
   return ast;
@@ -19,7 +19,6 @@ if(layoutWidget.nested){
 
   function searchWidgetAndPush(prop:any) {
     Object.entries(prop).forEach(([, v]: any) => {
-      debugger;
       if (v.class === widget) {
         let index = v.properties.findIndex((data: any) => (data.namedProp === layoutWidget.namedProp));
         if (index < 0) {
