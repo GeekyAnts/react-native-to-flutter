@@ -4,7 +4,7 @@ import { dartType } from "..";
 
 export const getPadding = (styles: any, object: any) => {
   object.properties = [];
-  debugger
+  
   if (styles.hasOwnProperty("padding")) {
 
     delete object.properties;

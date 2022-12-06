@@ -1,5 +1,10 @@
 
-import {  getAlignmentAxis, getBorder, getBorderRadius, getColor, getExpanded, getPositioned, toDouble, toInt } from "./utils/styled-system";
+import {  getColor, toDouble, toInt } from "./utils/styled-system";
+import { getBorder } from "./utils/getBorder";
+import { getPositioned } from "./utils/getPositioned";
+import { getExpanded } from "./utils/getExpanded";
+import { getBorderRadius } from "./utils/getBorderRadius";
+import { getAlignmentAxis } from "./utils/getAlignmentAxis";
 import { getMargin } from "./utils/getMargin";
 import { getPadding } from "./utils/getPadding";
 import { pushPropToWidget } from "./utils/pushPropToWidget";
@@ -105,6 +110,13 @@ export const flutterWidget = {
     value: dartType.double,
   },
 
+  EdgeInsetsDirectional: {
+    type: "constructor",
+    class: "EdgeInsetsDirectional.all",
+    properties: [],
+    value: dartType.double,
+  },
+
   RadiusCircular: {
     type: "constructor",
     class: "Radius.circular",
@@ -113,6 +125,24 @@ export const flutterWidget = {
 
 
   BorderBottomWidth: {
+    type: "constructor",
+    class: "BorderSide",
+    properties: [
+
+    ],
+    value: dartType.double,
+  },
+
+  BorderStartWidth:{
+    type: "constructor",
+    class: "BorderSide",
+    properties: [
+
+    ],
+    value: dartType.double,
+  },
+
+  BorderEndWidth:{
     type: "constructor",
     class: "BorderSide",
     properties: [
@@ -163,7 +193,7 @@ export const flutterWidget = {
 
   BorderRadius: {
     type: "constructor",
-    class: "BorderRadius.all",
+    class: "BorderRadius.circular",
     namedProp: "borderRadius",
     properties: [
 
@@ -319,7 +349,34 @@ let styleSystem: any = {
     },
     transformer: getBorderRadius
   },
+
+  
   borderWidth: {
+    "widget": "Container",
+    "property": "border",
+    class: flutterWidget.Border,
+    "partOf": {
+      "class": flutterWidget.BoxDecoration,
+      "property": "decoration",
+    },
+
+    transformer: getBorder,
+  },
+
+
+  borderStartWidth: {
+    "widget": "Container",
+    "property": "border",
+    class: flutterWidget.Border,
+    "partOf": {
+      "class": flutterWidget.BoxDecoration,
+      "property": "decoration",
+    },
+
+    transformer: getBorder,
+  },
+
+  borderEndWidth: {
     "widget": "Container",
     "property": "border",
     class: flutterWidget.Border,
@@ -435,6 +492,20 @@ let styleSystem: any = {
     transformer: getMargin,
   },
 
+
+  marginStart: {
+    "widget": "Container",
+    "property": "margin",
+    class: flutterWidget.EdgeInsetsDirectional,
+    transformer: getMargin,
+  },
+  marginEnd: {
+    "widget": "Container",
+    "property": "margin",
+    class: flutterWidget.EdgeInsetsDirectional,
+    transformer: getMargin,
+  },
+
   marginRight: {
     "widget": "Container",
     "property": "margin",
@@ -450,6 +521,20 @@ let styleSystem: any = {
   },
 
   marginBottom: {
+    "widget": "Container",
+    "property": "margin",
+    class: flutterWidget.EdgeInsets,
+    transformer: getMargin,
+  },
+
+  marginHorizontal :{
+    "widget": "Container",
+    "property": "margin",
+    class: flutterWidget.EdgeInsets,
+    transformer: getMargin,
+  },
+
+  marginVertical :{
     "widget": "Container",
     "property": "margin",
     class: flutterWidget.EdgeInsets,
@@ -476,6 +561,8 @@ justifyContent :{
     class : flutterWidget.MainAxisAlignment,
     transformer : getAlignmentAxis
   },
+
+  
 
 position :{
   widget:"Positioned",
