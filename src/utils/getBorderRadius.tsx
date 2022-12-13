@@ -1,10 +1,12 @@
-import { flutterWidget } from "..";
+import { flutterWidget } from "../config/flutter-widgets";
+
 
 
 
 export const getBorderRadius = (styles: any, object: any) => {
 
   object.properties = [];
+  debugger
   if (styles.hasOwnProperty("borderRadius")) {
 
     delete object.properties;

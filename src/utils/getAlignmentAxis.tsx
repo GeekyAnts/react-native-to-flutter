@@ -1,4 +1,5 @@
-import { flutterWidget } from "..";
+
+import { flutterWidget } from "../config/flutter-widgets";
 import { toCamel } from "./camel";
 import { pushPropToWidget } from "./pushPropToWidget";
 

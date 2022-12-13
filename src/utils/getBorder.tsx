@@ -1,4 +1,6 @@
-import { dartType, flutterWidget } from "..";
+import { flutterWidget } from "../config/flutter-widgets";
+import { dartType } from "../config/layout-props";
+
 
 
 

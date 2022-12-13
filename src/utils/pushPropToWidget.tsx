@@ -1,6 +1,6 @@
 
 export function pushPropToWidget(ast: any, layoutWidget: any,widget:string) {
-  
+  debugger
 if(layoutWidget.nested){
   ast = layoutWidget.object;
   return ast;

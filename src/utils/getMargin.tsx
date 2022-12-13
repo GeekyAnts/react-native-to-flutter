@@ -1,4 +1,5 @@
-import { dartType } from "..";
+import { dartType } from "../config/layout-props";
+
 
 
 
