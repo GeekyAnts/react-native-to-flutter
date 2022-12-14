@@ -13,6 +13,10 @@ export const dartType = {
     transformer: toInt,
     value: ""
   },
+  string :{
+    type:"string",
+    value:""
+  }
 
 }
 
@@ -254,7 +258,7 @@ export const flutterWidget = {
     },
 
     FontFamily :{
-      type:"string",
+      type:dartType.string,
       class:"FontFamily",
       value:""
     }
