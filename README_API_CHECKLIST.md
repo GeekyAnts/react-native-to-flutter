@@ -18,19 +18,19 @@ This is the list of React Native Styling props, as per the official [React Nativ
 
 - [x] borderBottomWidth
 
-- [ ] borderEndWidth
+- [x] borderEndWidth
 
 - [x] borderLeftWidth
 
 - [x] borderRightWidth
 
-- [ ] borderStartWidth
+- [x] borderStartWidth
 
 - [x] borderTopWidth
 
 - [x] borderWidth
 
-- [ ] bottom
+- [x] bottom
 
 - [x] direction
 
@@ -54,7 +54,7 @@ This is the list of React Native Styling props, as per the official [React Nativ
 
 - [x] justifyContent
 
-- [ ] left
+- [x] left
 
 - [x] margin
 
@@ -62,17 +62,17 @@ This is the list of React Native Styling props, as per the official [React Nativ
 
 - [x] marginEnd
 
-- [ ] marginHorizontal
+- [x] marginHorizontal
 
 - [x] marginLeft
 
 - [x] marginRight
 
-- [ ] marginStart
+- [x] marginStart
 
 - [x] marginTop
 
-- [ ] marginVertical
+- [x] marginVertical
 
 - [x] maxHeight
 
@@ -90,25 +90,25 @@ This is the list of React Native Styling props, as per the official [React Nativ
 
 - [x] paddingEnd
 
-- [ ] paddingHorizontal
+- [x] paddingHorizontal
 
 - [x] paddingLeft
 
 - [x] paddingRight
 
-- [ ] paddingStart
+- [x] paddingStart
 
 - [x] paddingTop
 
-- [ ] paddingVertical
+- [x] paddingVertical
 
-- [ ] position
+- [x] position
 
-- [ ] right
+- [x] right
 
 - [ ] start
 
-- [ ] top
+- [x] top
 
 - [x] width
 
