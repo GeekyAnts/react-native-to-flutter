@@ -119,23 +119,23 @@ This is the list of React Native Styling props, as per the official [React Nativ
 <details>
 <summary> Text Props </summary>
 
-- [ ] fontFamily
+- [x] fontFamily
 
-- [ ] fontSize
+- [x] fontSize
 
-- [ ] fontStyle
+- [x] fontStyle
 
-- [ ] fontWeight
+- [x] fontWeight
 
 - [ ] includeFontPaddingAndroid
 
-- [ ] fontVariant
+- [x] fontVariant
 
-- [ ] letterSpacing
+- [x] letterSpacing
 
-- [ ] lineHeight
+- [x] lineHeight
 
-- [ ] textAlign
+- [x] textAlign
 
 - [ ] textAlignVerticalAndroid
 
@@ -166,19 +166,19 @@ This is the list of React Native Styling props, as per the official [React Nativ
  
 - [x] borderBottomColor
  
-- [ ] borderBottomEndRadius
+- [x] borderBottomEndRadius
  
 - [x] borderBottomLeftRadius
  
 - [x] borderBottomRightRadius
  
-- [ ] borderBottomStartRadius
+- [x] borderBottomStartRadius
  
 - [x] borderBottomWidth
  
 - [x] borderColor
  
-- [ ] borderEndColor
+- [x] borderEndColor
  
 - [x] borderLeftColor
  
@@ -190,19 +190,19 @@ This is the list of React Native Styling props, as per the official [React Nativ
  
 - [x] borderRightWidth
  
-- [ ] borderStartColor
+- [x] borderStartColor
  
-- [ ] borderStyle
+- [x] borderStyle
  
 - [x] borderTopColor
  
-- [ ] borderTopEndRadius
+- [x] borderTopEndRadius
  
 - [x] borderTopLeftRadius
  
 - [x] borderTopRightRadius
  
-- [ ] borderTopStartRadius
+- [x] borderTopStartRadius
  
 - [x] borderTopWidth
  
