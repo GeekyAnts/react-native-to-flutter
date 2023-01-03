@@ -5,6 +5,7 @@ export const readReactAttribute = () => {
   
    
     return {
+      
        
       visitor: {
         
@@ -20,12 +21,9 @@ export const readReactAttribute = () => {
            
             Object.entries(properties).forEach(([,v]:any)=>{
               styles[v.key.name] = v.value.value
-            
             });
          
             buildDartAST(nodeName,styles)
-           
-   
            
           }
         },
