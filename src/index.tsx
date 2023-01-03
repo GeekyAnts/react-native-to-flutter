@@ -4,17 +4,10 @@ import { styleSystem } from "./config";
 import { flutterWidget } from "./config/flutter-widgets";
 import { pushPropToWidget } from "./utils/pushPropToWidget";
 
-import * as babel from '@babel/core';
+import * as parser from '@babel/parser';
 //@ts-ignore
 import xyz from '@babel/preset-react'
-import { readReactAttribute } from "./plugin/transformer";
 // import { transformer } from "./plugin/transformer";
-
-
-
-
-
-
 
 
 
@@ -24,7 +17,7 @@ let mapReactComponentToFlutterWidgets: any = {
 };
 
 
-let count =0;
+let count = 0;
 let dartAST: any = {}
 
 
@@ -41,8 +34,8 @@ let dartAST: any = {}
 
 export function buildDartAST(component: any, theme: any) {
 
-debugger
-console.log(theme)
+
+
   try {
     let widget: any = mapReactComponentToFlutterWidgets[component];
     delete widget.properties;
@@ -60,9 +53,9 @@ console.log(theme)
     console.error(error)
     return error
   } finally {
-    
-    createFlutterWidget(dartAST,count)
-    
+    return dartAST
+    // createFlutterWidget(dartAST,count)
+
   }
 
 
@@ -97,17 +90,6 @@ function loopStyle(theme: any) {
           }
 
 
-          // if(myObject.nested){
-          //   dartAST = myObject.object;
-          // }else {
-          //   let index = dartAST["properties"].findIndex((data: any) => { return data.class === myObject.class });
-
-          //   if (index < 0) {
-
-          //     dartAST.properties.push(myObject);
-          //   }
-
-          // }
 
 
         }
@@ -123,18 +105,6 @@ function loopStyle(theme: any) {
           pushPropToWidget(dartAST, myObject, widget);
         }
 
-
-        // if(myObject.nested){
-        //   dartAST = myObject.object;
-        // }else {
-        //   let index = dartAST["properties"].findIndex((data: any) => { return data.namedProp === myObject.namedProp });
-
-        //   if (index < 0) {
-
-        //     dartAST.properties.push(myObject);
-        //   }
-
-        // }
 
       }
     }
@@ -190,13 +160,12 @@ function addProperty(myObject: any, val: any, prop: any, style: any) {
     if (styleSystem[prop].hasOwnProperty("partOf")) {
 
       let index = myObject["properties"].findIndex((data: any) => {
-
-
         return data.namedProp === newProp.namedProp;
 
       });
 
       if (index < 0) {
+        myObject = { ...myObject, properties: myObject.properties }
         myObject.properties.push(newProp);
       }
     } else {
@@ -225,7 +194,13 @@ export function createFlutterWidget(ast: any, c: number) {
     }
 
   } else {
-    code += `${tab.repeat(c)}${ast.class}(\n`
+
+    if (ast.hasOwnProperty("value")) {
+      code += `${tab.repeat(c)}${ast.class}('${ast.value}',\n`
+    } else {
+      code += `${tab.repeat(c)}${ast.class}(\n`
+    }
+
   }
   c++
 
@@ -260,7 +235,7 @@ export function createFlutterWidget(ast: any, c: number) {
               innerValue.value = innerValue.transformer(innerValue.value)
             }
           }
-        
+
           if (innerValue.type === "constructor") {
             // Build class when its constrictor
             /// for eg Color(0xffffffff)
@@ -271,7 +246,7 @@ export function createFlutterWidget(ast: any, c: number) {
             /// for eg MainAxisAlignment.center
             code += `${tab.repeat(c)}${innerValue.namedProp}:${innerValue.class}.${innerValue.value.value ?? innerValue.value},\n`
           } else if (innerValue.type === "string") {
-          
+
             code += `${tab.repeat(c)}${innerValue.namedProp}: "${innerValue.value.value ?? innerValue.value}", \n`
           }
 
@@ -279,6 +254,10 @@ export function createFlutterWidget(ast: any, c: number) {
 
 
       } else {
+
+
+
+
         if (innerValue.type === "nameConstructor") {
 
           let args: string = ''
@@ -304,6 +283,17 @@ export function createFlutterWidget(ast: any, c: number) {
           } else {
             code += `${tab.repeat(c)}${innerKey}:${innerValue.callee}.${innerValue.name}(\n${innerValue.value}),\n`
           }
+        } else if (innerValue.type == "Array") {
+
+          code += `${tab.repeat(c)}${innerValue.namedProp}:[\n`
+          c++;
+          Object.entries(innerValue.values).forEach(([, v]: any) => {
+
+            createFlutterWidget(v, c);
+            code += `${tab.repeat(c)}),\n`
+          });
+          c--;
+          code += `${tab.repeat(c)}],\n`
         } else {
 
           if (innerValue.transformer) {
@@ -323,7 +313,7 @@ export function createFlutterWidget(ast: any, c: number) {
 
   });
 
- 
+
 }
 
 
@@ -339,11 +329,11 @@ export function createFlutterWidget(ast: any, c: number) {
 
 export const convertNativeBaseThemeToFlutterWidgets = (styles: any): string => {
 
-  
 
 
 
- 
+
+
   try {
     //let a = buildDartAST(component, styles);
 
@@ -352,21 +342,67 @@ export const convertNativeBaseThemeToFlutterWidgets = (styles: any): string => {
     // } else {
     //   createFlutterWidget(a, count)
     // }
-
+    let ast: any;
     code = '';
-  let out = babel.transform(styles, 
-      { 
-        ast:true,
-        presets:[xyz],
-        plugins: [readReactAttribute], 
-  
+
+    try {
+      ast = parser.parse(styles, {
+        plugins: [
+          // enable jsx and flow syntax
+          "jsx",
+          "flow",
+        ],
+      });
+      console.log(ast);
+      debugger
+      let style: any = {};
+      let myDartAST: any;
+      let expression = ast.program.body[0].expression;
+      let name = expression.openingElement.name.name;
+      if (expression.type === "JSXElement") {
+
+        let attributes = expression.openingElement.attributes[0];
+
+        if (attributes.name.name === "style") {
+
+          let properties = attributes.value.expression.properties;
+          Object.entries(properties).forEach(([, v]: any) => {
+            style[v.key.name] = v.value.value
+          });
+          myDartAST = buildDartAST(name, style)
+          console.log(myDartAST);
+          console.log(style)
+        }
       }
-    );
-    console.log(out);
+      buildDartASTfromAST(expression, myDartAST);
+
+      createFlutterWidget(myDartAST, count);
+    } catch (error) {
+
+      console.log(error);
+      code = error as string;
+    }
+
+
+
+
+
+
+
+
+    // babel.transform(styles, 
+    //       { 
+    //         ast:true,
+    //         presets:[xyz],
+    //         plugins: [readReactAttribute], 
+
+    //       }
+    //     );
+
     code += ');\n'
     //console.log(a)
 
-    
+
   } catch (error) {
     code = error as string
   }
@@ -374,3 +410,83 @@ export const convertNativeBaseThemeToFlutterWidgets = (styles: any): string => {
 
   return code;
 }
+function buildDartASTfromAST(expression: any, myDartAST: any) {
+  debugger
+  console.log(myDartAST);
+  if(expression.children.length <2){
+    if (myDartAST.class) {
+      let index = myDartAST.properties.findIndex((data: any) => (data.namedProp === "child"));
+      if (myDartAST.properties[index]?.class === "Row" || myDartAST.properties[index]?.class === "Column") {
+        let i = myDartAST.properties[index].properties.findIndex((data: any) => (data.namedProp === "children"));
+        debugger;
+        if(i>-1){
+          myDartAST.properties[index].properties[i].values = [];
+        }
+      }
+    }
+  }
+  Object.entries(expression.children).forEach(([k, v]: any) => {
+    let value = "";
+
+    if (v.type === "JSXElement") {
+
+      let style = {};
+      if (v.children.length > 0) {
+        if (v.children[0].type === "JSXText") {
+          value = v.children[0].value
+        }
+      } else {
+        value = '';
+      }
+
+      let name = v.openingElement.name.name;
+      let attributes = v.openingElement.attributes[0];
+
+      if (attributes.name.name === "style") {
+
+        let properties = attributes.value.expression.properties;
+        Object.entries(properties).forEach(([, v]: any) => {
+
+          style = { ...style, [v.key.name]: v.value.value }
+        });
+
+        if (myDartAST.class) {
+          let a: any = {};
+          a = buildDartAST(name, style)
+          a = { ...a, id: k, value: value };
+          let index = myDartAST.properties.findIndex((data: any) => (data.namedProp === "child"));
+          if (myDartAST.properties[index]?.class === "Row" || myDartAST.properties[index]?.class === "Column") {
+
+            let i = myDartAST.properties[index].properties.findIndex((data: any) => (data.namedProp === "children"));
+            debugger
+            if (i > -1) {
+              let ii = myDartAST.properties[index].properties[i].values.findIndex((data: any) => (data.id === a.id));
+              if (ii > -1) {
+                myDartAST.properties[index].properties[i].values.splice(ii, 1);
+              }
+
+              myDartAST.properties[index].properties[i].values.push(a);
+
+
+
+
+            } else {
+              myDartAST.properties[index].properties.push({ namedProp: "children", type: "Array", values: [a] })
+            }
+
+          } else {
+
+            myDartAST.properties.push({ "namedProp": "child", a });
+          }
+
+        }
+
+        console.log(style);
+        console.log(myDartAST);
+      }
+
+    }
+  });
+
+}
+

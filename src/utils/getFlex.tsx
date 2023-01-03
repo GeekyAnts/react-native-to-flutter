@@ -4,7 +4,7 @@ import { dartType } from "../config/layout-props";
 
 
 export const getFlex = (styles: any, object: any, ast?: any) => {
-  debugger;
+
   let widget: any = {};
   if (styles.hasOwnProperty("flex")) {
     widget = flutterWidget.Flex;

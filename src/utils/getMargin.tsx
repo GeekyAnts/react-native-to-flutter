@@ -5,7 +5,7 @@ import { dartType } from "../config/layout-props";
 
 export const getMargin = (styles: any, object: any) => {
   object.properties = [];
-  debugger;
+
   if (styles.hasOwnProperty("margin")) {
 
     delete object.properties;

@@ -30,7 +30,8 @@ export const flutterWidget = {
     Text: {
         type: "constructor",
         class: "Text",
-        properties: []
+        properties: [],
+        value:""
       },
   
     MainAxisAlignment :{
@@ -258,7 +259,7 @@ export const flutterWidget = {
     },
 
     FontFamily :{
-      type:dartType.string,
+      type:"string",
       class:"FontFamily",
       value:""
     }

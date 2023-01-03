@@ -50,13 +50,15 @@ import Editor from "@monaco-editor/react";
  let styles=( `
  <View style={{
       backgroundColor:"#ffffff",
-      alignItems:"center",
-      justifyContent:"center",
+     alignItems:"center",
       borderRadius:5,
       borderWidth:3,
       borderColor:"#cfcfcf"
   }}>
+      <Text style={{color:"#000000",fontFamily:"monaco"}}>Hello</Text>
       <Text style={{color:"#000000"}}></Text>
+      <Text style={{color:"#000000"}}></Text>
+      <Text style={{color:"#000000",fontStyle:"italic"}}></Text>
  </View>`)
 function App() {
   const [code, setCode] = useState(styles);

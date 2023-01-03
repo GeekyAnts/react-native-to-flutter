@@ -24,7 +24,7 @@ export const getBorder = (styles: any, object: any) => {
   }
 
   else if (styles.borderEndWidth || styles.borderStartWidth) {
-    debugger;
+
     object.properties = [];
     if (styles.hasOwnProperty("borderEndWidth")) {
 
