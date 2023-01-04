@@ -28,7 +28,7 @@ export const getTextAlign = (styles: any,object:any) =>{
 
 export const getFontFamily = (styles:any,object:any)=>{
 
-debugger
+
   object = {...object,value:styles.fontFamily}
   return object
 }
