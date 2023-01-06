@@ -12,7 +12,7 @@ export const getBorderRadius = (styles: any, object: any) => {
     delete object.properties;
   } else if (styles.hasOwnProperty("borderEndWidth") || styles.hasOwnProperty("borderEndWidth")) {
   } else {
-    object.nameProp = "BorderRadius.only";
+    object.namedProp = "BorderRadius.only";
     if (styles.hasOwnProperty("borderTopLeftRadius")) {
 
       let widget: any = flutterWidget.RadiusCircular;
