@@ -49,7 +49,7 @@ import Editor from "@monaco-editor/react";
 //}
  let styles=( `
  <View >
-      
+      <View></View>
  </View>`)
 function App() {
   const [code, setCode] = useState(styles);

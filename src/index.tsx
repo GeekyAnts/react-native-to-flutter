@@ -29,8 +29,8 @@ export function buildDartAST(component: any, theme: any) {
 
   try {
     let widget: any = { ...mapReactComponentToFlutterWidgets[component] };
-
-    delete widget.properties;
+    debugger
+    // delete widget.properties;
     widget.properties = []
     let a = ''
     a = widget;
@@ -100,11 +100,11 @@ let tab: string = '\t';
 // @ts-ignore
 
 export function createFlutterWidget(ast: any, c: number) {
-  debugger
+
   if (ast?.hasOwnProperty("namedProp")) {
     if (ast.type === "constructor") {
       if (ast.hasOwnProperty("value")) {
-        debugger
+
         code += `${tab.repeat(c)}${ast.namedProp}:${ast.class}('${ast.value}',\n`
       } else {
         code += `${tab.repeat(c)}${ast.namedProp}:${ast.class}(\n`
@@ -117,10 +117,10 @@ export function createFlutterWidget(ast: any, c: number) {
   } else {
 
     if (ast?.hasOwnProperty("value")) {
-      debugger
+
       code += `${tab.repeat(c)}${ast.class}('${ast.value}',\n`
     } else {
-      debugger
+
       code += `${tab.repeat(c)}${ast?.class}(\n`
     }
 
@@ -266,7 +266,7 @@ export const convertNativeBaseThemeToFlutterWidgets = (styles: any): string => {
       let myDartAST: any;
       let expression = ast.program.body[0].expression;
       let name = expression.openingElement.name.name;
-      debugger;
+
       if (expression.type === "JSXElement") {
 
         let attributes = expression.openingElement.attributes[0];
@@ -279,15 +279,44 @@ export const convertNativeBaseThemeToFlutterWidgets = (styles: any): string => {
             });
             myDartAST = buildDartAST(name, style)
 
+            if (name === "View") {
+              let index = myDartAST.properties.findIndex((data: any) => (data.class === "Row"));
+              if (index > -1) {
+
+                myDartAST.properties.splice(index, 1);
+              }
+              const layout = {
+                type: "constructor",
+                class: "Row",
+                properties: []
+              }
+              myDartAST.properties.push({ ...layout, "namedProp": "child" })
+
+            }
 
 
           }
         } else {
           myDartAST = buildDartAST(name, style)
+
+          if (name === "View") {
+            let index = myDartAST.properties.findIndex((data: any) => (data.class === "Row"));
+            if (index > -1) {
+
+              myDartAST.properties.splice(index, 1);
+            }
+            const layout = {
+              type: "constructor",
+              class: "Row",
+              properties: []
+            }
+            myDartAST.properties.push({ ...layout, "namedProp": "child" })
+
+          }
         }
 
       }
-      debugger
+
       buildDartASTfromAST(expression, myDartAST);
 
       createFlutterWidget(myDartAST, count);

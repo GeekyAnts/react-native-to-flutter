@@ -24,7 +24,10 @@ export const flutterWidget = {
     Container: {
       type: "constructor",
       class: "Container",
-      properties: []
+      properties: [
+       
+        
+      ]
     },
 
     Text: {

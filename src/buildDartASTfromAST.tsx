@@ -1,10 +1,9 @@
+import { flutterWidget } from "./config/flutter-widgets";
 import { buildDartAST } from "./index";
 
 export function buildDartASTfromAST(expression: any, myDartAST: any, recursive: boolean = false) {
 
-  let ast = myDartAST;
-  console.log(ast);
-  console.log(myDartAST);
+
 
   if (!recursive) {
     if (expression.children.length < 2) {
@@ -39,11 +38,12 @@ export function buildDartASTfromAST(expression: any, myDartAST: any, recursive: 
 
     if (v.type === "JSXElement") {
 
+
+
       let style = {};
-
-
-
+      debugger
       let name = v.openingElement.name.name;
+      
       let attributes = v.openingElement.attributes[0];
 
 
@@ -60,10 +60,17 @@ export function buildDartASTfromAST(expression: any, myDartAST: any, recursive: 
       if (myDartAST?.class) {
 
         a = buildDartAST(name, style);
-
+        if (name === "View") {
+          let index = a.properties.findIndex((data: any) => (data.class === "Row" || data.class == "Column"));
+          if (index > -1) {
+  
+            a.properties.splice(index, 1);
+          }
+          const layout = flutterWidget.Row;
+          a.properties.push({ ...layout, "namedProp": "child" })
+        }
         if (name === 'Text') {
-
-          a = { ...a, id: k, value: '' };
+          a = { ...a, id: k, value: v.children[0]?.value ?? '' };
         } else {
           a = { ...a, id: k };
         }
