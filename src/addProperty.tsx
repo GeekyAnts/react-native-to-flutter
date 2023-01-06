@@ -1,7 +1,6 @@
 import { styleSystem } from "./config";
 
 export function addProperty(myObject: any, val: any, prop: any, style: any, ast: any) {
-
   let newProp: any;
   if (styleSystem.hasOwnProperty(prop)) {
     if (myObject.type === "constructor" || myObject.type === "enum") {
@@ -11,7 +10,10 @@ export function addProperty(myObject: any, val: any, prop: any, style: any, ast:
       if (typeof newProp.value === "object") {
         newProp.value = { ...newProp.value, value: val };
       } else {
-        newProp.value = val;
+        if(newProp.hasOwnProperty("value")){
+          newProp.value = val;
+        }
+       
       }
 
 

@@ -13,11 +13,15 @@ export const toDouble = (value: any) => {
 }
 
 export const toInt = (value: any) => {
-
-  if (value.indexOf("#") === 0) {
-    value = value.replace("#", "0xff");
-    return value
+  if(typeof value === "string"){
+    if (value.indexOf("#") === 0) {
+      value = value.replace("#", "0xff");
+      return value
+    }
+  } else if(typeof value === "number"){
+    return value;
   }
+  
   return parseInt(value);
 
 }

@@ -1,9 +1,8 @@
-import { flutterWidget } from "./config/flutter-widgets";
 import { buildDartAST } from "./index";
 
 export function buildDartASTfromAST(expression: any, myDartAST: any, recursive: boolean = false) {
 
-
+debugger
 
   if (!recursive) {
     if (expression.children.length < 2) {
@@ -33,7 +32,7 @@ export function buildDartASTfromAST(expression: any, myDartAST: any, recursive: 
 
 
   Object.entries(expression.children).forEach(([k, v]: any) => {
-
+    debugger
     let a: any = {};
 
     if (v.type === "JSXElement") {
@@ -41,9 +40,9 @@ export function buildDartASTfromAST(expression: any, myDartAST: any, recursive: 
 
 
       let style = {};
-      debugger
+   
       let name = v.openingElement.name.name;
-      
+
       let attributes = v.openingElement.attributes[0];
 
 
@@ -58,16 +57,35 @@ export function buildDartASTfromAST(expression: any, myDartAST: any, recursive: 
       }
 
       if (myDartAST?.class) {
+        let layout: any = {
+          type: "constructor",
+          properties: []
+        }
+
 
         a = buildDartAST(name, style);
+
         if (name === "View") {
-          let index = a.properties.findIndex((data: any) => (data.class === "Row" || data.class == "Column"));
+          let index = a.properties.findIndex((data: any) => (data.class === "Row" || data.class === "Column"));
           if (index > -1) {
-  
+
+            layout = { ...layout, "class": a.properties[index].class }
             a.properties.splice(index, 1);
+          } else {
+            layout = { ...layout, "class": "Row" }
           }
-          const layout = flutterWidget.Row;
-          a.properties.push({ ...layout, "namedProp": "child" })
+
+
+
+
+
+          let childIndex = a.properties.findIndex((data: any) => (data.namedProp === "child"));
+          if (childIndex > -1) {
+            a.properties[childIndex].properties.push({ ...layout, "namedProp": "child" })
+          } else {
+            a.properties.push({ ...layout, "namedProp": "child" })
+          }
+
         }
         if (name === 'Text') {
           a = { ...a, id: k, value: v.children[0]?.value ?? '' };
@@ -94,11 +112,12 @@ export function buildDartASTfromAST(expression: any, myDartAST: any, recursive: 
           }
 
         } else {
+          debugger
+          searchForDeepChildAndPush(myDartAST, a);
 
-          myDartAST?.properties.push({ "namedProp": "child", ...a });
+          // myDartAST?.properties.push({ "namedProp": "child", ...a });
         }
 
-      } else {
       }
 
       console.log(style);
@@ -119,3 +138,52 @@ export function buildDartASTfromAST(expression: any, myDartAST: any, recursive: 
 
 
 }
+
+export function searchForDeepChildAndPush(myDartAST: any, a: any) {
+  debugger
+  let prop = myDartAST?.properties ?? myDartAST?.values;
+  if(prop.length > 0){
+    Object.entries(prop).forEach(([, v]: any) => {
+      
+  
+      if (v.namedProp === "child") {
+        if (v.properties.length > 0) {
+          searchForDeepChildAndPush(v, a);
+        } else {
+          pushChildToParent(v, a);
+        }
+      } if (v.namedProp === "children") {
+        
+        if(a.hasOwnProperty("namedProp")){
+          if (v.values.length > 0) {
+            searchForDeepChildAndPush(v, a);
+          } else {
+            pushChildToParent(v, a);
+          }
+        } else {
+          v.values.push(a)
+        }
+        
+  
+      }
+    });
+
+  } else {
+    
+    pushChildToParent(myDartAST,a)
+  }
+  
+}
+
+export function pushChildToParent(v: any, a: any) {
+  if (v.type == "constructor") {
+   
+    if (v.class === 'Row' || v.class === 'Column') {
+      v.properties.push({ namedProp: "children", type: "Array", values: [a] });
+    } else {
+      v.properties.push({ "namedProp": "child", ...a });
+    }
+
+  }
+}
+

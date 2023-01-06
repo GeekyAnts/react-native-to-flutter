@@ -6,14 +6,13 @@ import { pushPropToWidget } from "./pushPropToWidget";
 
 
 export const getAlignmentAxis = (styles: any, object: any, ast: any) => {
-  debugger
-  let layoutWidget: any = flutterWidget.Row;
+
+  let layoutWidget: any = {...flutterWidget.Row};
   //layoutWidget.properties = [];
   if (styles.hasOwnProperty("flexDirection")) {
     if (styles.flexDirection === "column") {
 
-      
-      layoutWidget = flutterWidget.Column;
+      layoutWidget = {...flutterWidget.Column};
 
     }
   }

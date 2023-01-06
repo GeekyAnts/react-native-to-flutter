@@ -4,15 +4,15 @@ import { dartType } from "../config/layout-props";
 
 
 export const getFlex = (styles: any, object: any, ast?: any) => {
-
+  
   let widget: any = {};
   if (styles.hasOwnProperty("flex")) {
-    widget = flutterWidget.Flex;
+    widget = {...flutterWidget.Flex};
     widget.properties = [];
     let flex: any = {};
     flex = dartType.double;
     flex = { ...flex, value: styles.flex };
-    flex["namedProp"] = "flex";
+    flex["namedProp"] = "flex1";
     let index = widget.properties.findIndex((data: any) => (data.class === widget.class));
 
     if (index > -1) {
