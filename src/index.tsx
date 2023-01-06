@@ -7,10 +7,9 @@ import { pushPropToWidget } from "./utils/pushPropToWidget";
 import * as parser from '@babel/parser';
 //@ts-ignore
 import xyz from '@babel/preset-react'
-import { buildDartASTfromAST } from "./buildDartASTfromAST";
+import { buildDartASTfromAST, searchForDeepChildAndPush } from "./buildDartASTfromAST";
 import { addProperty } from "./addProperty";
 import { clearProperties } from "./clearProperties";
-// import { transformer } from "./plugin/transformer";
 
 
 
@@ -29,7 +28,7 @@ export function buildDartAST(component: any, theme: any) {
 
   try {
     let widget: any = { ...mapReactComponentToFlutterWidgets[component] };
-    debugger
+    
     // delete widget.properties;
     widget.properties = []
     let a = ''
@@ -55,6 +54,7 @@ export function buildDartAST(component: any, theme: any) {
 
 
 function loopStyle(theme: any, ast: any) {
+  
 
   Object.entries(theme).map(([k, v]: any) => {
 
@@ -75,7 +75,7 @@ function loopStyle(theme: any, ast: any) {
           }
         }
       } else {
-
+        
         let newVal = { ...styleSystem[k].class };
         let myObject = addProperty(newVal, v, k, theme, ast);
         let widget = styleSystem[k].widget;
@@ -128,7 +128,7 @@ export function createFlutterWidget(ast: any, c: number) {
   c++
   if (ast?.hasOwnProperty("properties")) {
     Object.entries(ast?.properties).forEach(([, v]: any) => {
-
+      
       if (v.hasOwnProperty("properties") || v.hasOwnProperty("widgets")) {
         createFlutterWidget(v, c);
         code += `${tab.repeat(c)}),\n`
@@ -278,39 +278,52 @@ export const convertNativeBaseThemeToFlutterWidgets = (styles: any): string => {
               style[v.key.name] = v.value.value
             });
             myDartAST = buildDartAST(name, style)
+            let layout: any = {
+              type: "constructor",
+              properties: []
+            }
 
+            console.log(myDartAST);
+            
             if (name === "View") {
-              let index = myDartAST.properties.findIndex((data: any) => (data.class === "Row"));
+              debugger;
+              let index = myDartAST.properties.findIndex((data: any) => (data.class === "Row" || data.class === "Column"));
               if (index > -1) {
-
+               
+                layout = {...layout,"class": myDartAST.properties[index].class}
                 myDartAST.properties.splice(index, 1);
+              } else {
+                layout = {...layout,"class": "Row"}
               }
-              const layout = {
-                type: "constructor",
-                class: "Row",
-                properties: []
-              }
-              myDartAST.properties.push({ ...layout, "namedProp": "child" })
-
+             
+             // myDartAST.properties.push({ ...layout, "namedProp": "child" })
+             
+              searchForDeepChildAndPush(myDartAST,{...layout,"namedProp": "child" });
             }
 
 
           }
         } else {
           myDartAST = buildDartAST(name, style)
+          let layout: any = {
+            type: "constructor",
+            properties: []
+          }
 
           if (name === "View") {
-            let index = myDartAST.properties.findIndex((data: any) => (data.class === "Row"));
+            let index = myDartAST.properties.findIndex((data: any) => (data.class === "Row" || data.class === "Column"));
             if (index > -1) {
-
+              layout = {...layout,"class": myDartAST.properties[index].class}
               myDartAST.properties.splice(index, 1);
+            } else {
+              layout = {...layout,"class": "Row"}
             }
-            const layout = {
-              type: "constructor",
-              class: "Row",
-              properties: []
-            }
-            myDartAST.properties.push({ ...layout, "namedProp": "child" })
+
+           //searchForDeepChildAndPush(myDartAST,{});
+           
+            searchForDeepChildAndPush(myDartAST,{...layout,"namedProp": "child" });
+            
+           // myDartAST.properties.push({ ...layout, "namedProp": "child" })
 
           }
         }

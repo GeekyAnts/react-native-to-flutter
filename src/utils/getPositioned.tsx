@@ -1,9 +1,10 @@
+import { flutterWidget } from "../config/flutter-widgets";
 import { dartType } from "../config/layout-props";
 
 
 
 export const getPositioned = (styles: any, object: any, ast?: any) => {
-
+  debugger
   object.properties = [];
   if (styles.hasOwnProperty("position")) {
     if (styles["position"] === "absolute") {
@@ -44,6 +45,10 @@ export const getPositioned = (styles: any, object: any, ast?: any) => {
 
       }
       object.properties.push(ast);
+      let stack:any = {...flutterWidget.Stack}
+      stack.properties = [];
+      stack.properties.push({ namedProp: "children", type: "Array", values: [object] })
+      object = stack
       return { nested: true, object };
     }
   } else {

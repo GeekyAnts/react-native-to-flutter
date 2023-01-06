@@ -65,6 +65,13 @@ export const flutterWidget = {
       class: "Column",
       properties: []
     },
+
+
+    Stack :{
+      type: "constructor",
+      class: "Stack",
+      properties: []
+    },
   
   
     Row :{
@@ -104,7 +111,7 @@ export const flutterWidget = {
     Expanded:{
       type:"constructor",
       class:"Expanded",
-      value:dartType.double,
+     
       properties: []
     },
   

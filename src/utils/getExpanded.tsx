@@ -4,15 +4,13 @@ import { dartType } from "../config/layout-props";
 
 
 export const getExpanded = (styles: any, object: any, ast?: any) => {
-
   let widget: any = {};
   if (styles.hasOwnProperty("flexGrow")) {
 
-    widget = flutterWidget.Expanded;
+    widget = {...flutterWidget.Expanded};
     widget.properties = [];
     let flex: any = {};
-    flex = dartType.double;
-
+    flex = dartType.int;
     flex = { ...flex, value: styles.flexGrow };
     flex["namedProp"] = "flex";
 
@@ -27,8 +25,9 @@ export const getExpanded = (styles: any, object: any, ast?: any) => {
     console.log(ast);
     if (ast.class === "Container") {
       delete widget.namedProp;
-      ast = widget;
-      object = ast;
+      //ast = widget;
+      widget.properties.push({namedProp:"child",...ast})
+      object = widget;
       return { nested: true, object };
     } else {
       searchForContainer(ast);

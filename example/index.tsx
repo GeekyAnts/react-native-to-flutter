@@ -48,8 +48,8 @@ import Editor from "@monaco-editor/react";
 
 //}
  let styles=( `
- <View >
-      <View></View>
+ <View style={{position:"absolute"}}>
+      
  </View>`)
 function App() {
   const [code, setCode] = useState(styles);

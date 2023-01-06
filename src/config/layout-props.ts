@@ -332,6 +332,12 @@ export const layoutProps  = {
       class : flutterWidget.MainAxisAlignment,
       transformer : getAlignmentAxis
     },
+
+    flexDirection:{
+      widget:"Row",
+      class : flutterWidget.Row,
+      transformer : getAlignmentAxis
+    },
   
     alignItems :{
       widget:"Column",
