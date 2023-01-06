@@ -1,4 +1,4 @@
-import { getColor, toDouble, toInt } from "../utils/styled-system";
+import { getColor, toDouble, toInt } from "../utils/converter";
 
 
 

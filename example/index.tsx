@@ -48,16 +48,8 @@ import Editor from "@monaco-editor/react";
 
 //}
  let styles=( `
- <View style={{
-      backgroundColor:"#ffffff",
-     alignItems:"center",
-      borderRadius:5,
-      borderWidth:3,
-      borderColor:"#cfcfcf"
-  }}>
-      <View style={{backgroundColor:"#fff"}} ></View>
-      <Text style={{color:"#000000"}}></Text>
-     
+ <View >
+      
  </View>`)
 function App() {
   const [code, setCode] = useState(styles);

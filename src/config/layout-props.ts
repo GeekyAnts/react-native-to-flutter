@@ -5,7 +5,7 @@ import { getExpanded } from "../utils/getExpanded"
 import { getMargin } from "../utils/getMargin"
 import { getPadding } from "../utils/getPadding"
 import { getPositioned } from "../utils/getPositioned"
-import { toDouble, toInt } from "../utils/styled-system"
+import { toDouble, toInt } from "../utils/converter"
 import { flutterWidget } from "./flutter-widgets"
 
 

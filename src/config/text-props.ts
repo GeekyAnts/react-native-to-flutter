@@ -1,5 +1,7 @@
 import { getFontStyle } from "../utils/getFontStyle";
-import { getFontFamily, getFontWeight, getTextAlign } from "../utils/styled-system";
+import { getFontWeight } from "../utils/getFontWeight";
+import { getFontFamily } from "../utils/getFontFamily";
+import { getTextAlign } from "../utils/getTextAlign";
 import { dartType, flutterWidget } from "./flutter-widgets";
 
 export const  textProp = {
