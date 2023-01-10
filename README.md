@@ -118,3 +118,6 @@ Thank you for your interest in contributing to React Native to Flutter Widgets !
 ### License
 
 Licensed under the [MIT](https://github.com/GeekyAnts/react-native-to-flutter/blob/main/LICENSE) License, Copyright © 2023 GeekyAnts. See LICENSE for more information.
+
+
+Made with ❤️ by <a href="https://geekyants.com/" ><img src="https://s3.ap-southeast-1.amazonaws.com/cdn.elitmus.com/sy0zfezmfdovlb4vaz6siv1l7g30" height="17"/></a>
