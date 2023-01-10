@@ -135,7 +135,18 @@ function App() {
   return (
 
     <div style={{ height: '100vh', padding: "10px" }}>
-      <h3 style={{ color: "#FFFFFF", borderBottom: "1px solid #cfcfcf", paddingBottom: "5px" }}>React Native Component to Flutter Widgets</h3>
+      <div className="ribbon">
+        <a href="https://github.com/GeekyAnts/react-native-to-flutter">Fork me on GitHub</a>
+      </div>
+      <div style={{display:"flex",alignItems:"center", borderBottom: "1px solid #cfcfcf",}}>
+        <h3 style={{ color: "#FFFFFF", paddingBottom: "5px" ,flex:1 }}>React Native Component to Flutter Widgets (Alpha)</h3>
+        <div style={{flex:1}}>
+        <a href ="https://github.com/GeekyAnts/react-native-to-flutter/issues/new" style={{justifySelf:"end",marginLeft:"auto",color:"#fff",fontWeight:"bolder",padding:"10px"}}>Report an issue</a>
+        <a href='https://github.com/GeekyAnts/react-native-to-flutter/blob/main/README_API_CHECKLIST.md' style={{justifySelf:"end",marginLeft:"auto",color:"#fff",fontWeight:"bolder",paddingRight:"300px"}}>Supported Props</a>
+        </div>
+        
+      </div>
+
       <div style={{ flexDirection: 'row', display: 'flex', height: '80%' }}>
 
         <div
@@ -148,12 +159,12 @@ function App() {
           }}
         >
 
-          <p style={{ color: "#FFFFFF" }}> Select React Native Component and add styles in the editor</p>
-          <p style={{ color: "#FFFFFF", margin: 0, padding: 0 }}>React Native Component</p>
+
 
           <div style={{ display: 'flex', height: "calc(100vh - 120px)" }}>
 
             <div style={{ flex: 1, height: "100%" }}>
+              <p style={{ color: "#FFFFFF", margin: 0, padding: 0 }}>React Native Component</p>
               <Editor
                 theme="vs-dark"
                 defaultLanguage="javascript"
@@ -182,7 +193,7 @@ function App() {
             </div>
             <div style={{ padding: '4px' }}></div>
             <div style={{ flex: 1, height: "100%" }}>
-
+              <p style={{ color: "#FFFFFF", margin: 0, padding: 0 }}>Flutter Widget</p>
               <Editor
                 theme="vs-dark"
                 defaultLanguage="dart"
@@ -194,20 +205,7 @@ function App() {
 
 
           </div>
-          <button
-            style={{
-              width: '100%',
 
-              backgroundColor: '#aae8dc',
-              color: '#4a5567',
-              border: 'none',
-              borderRadius: 5,
-              marginTop: 4,
-            }}
-            onClick={() => transpileCode(code)}
-          >
-            Convert
-          </button>
         </div>
       </div>
     </div>
