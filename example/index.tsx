@@ -48,7 +48,7 @@ import Editor from "@monaco-editor/react";
 
 //}
  let styles=( `
- <View style={{position:"absolute"}}>
+ <View style={{flexDirection:"column"}}>
       
  </View>`)
 function App() {
