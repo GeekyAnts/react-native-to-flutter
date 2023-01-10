@@ -10,4 +10,52 @@ This tool will take the React Native styling props on the left hand side editor 
 ### Working Example
 <img src="https://github.com/GeekyAnts/react-native-to-flutter/blob/dev/banner/example.gif?raw=true" height="400" >
 
+### Folder Structure
+
+```
+.
+├── LICENSE
+├── README.md
+├── README_API_CHECKLIST.md
+├── package-lock.json
+├── package.json
+├── src
+│   ├── addProperty.tsx
+│   ├── buildDartASTfromAST.tsx
+│   ├── clearProperties.tsx
+│   ├── config
+│   │   ├── flutter-widgets.ts
+│   │   ├── index.ts
+│   │   ├── layout-props.ts
+│   │   └── text-props.ts
+│   ├── index.tsx
+│   └── utils
+│       ├── arr.js
+│       ├── camel.ts
+│       ├── converter.tsx
+│       ├── getAlignmentAxis.tsx
+│       ├── getBorder.tsx
+│       ├── getBorderRadius.tsx
+│       ├── getExpanded.tsx
+│       ├── getFlex.tsx
+│       ├── getFlexDirection.tsx
+│       ├── getFontFamily.tsx
+│       ├── getFontStyle.tsx
+│       ├── getFontWeight.tsx
+│       ├── getMargin.tsx
+│       ├── getPadding.tsx
+│       ├── getPositioned.tsx
+│       ├── getTextAlign.tsx
+│       ├── num.ts
+│       ├── pos.js
+│       ├── pushPropToWidget.tsx
+│       ├── str.js
+│       └── unit.ts
+├── test
+│   └── blah.test.tsx
+├── tsconfig.json
+└── yarn.lock
+
+```
+
 
