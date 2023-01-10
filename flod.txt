@@ -1,0 +1,46 @@
+.
+├── LICENSE
+├── README.md
+├── README_API_CHECKLIST.md
+├── backup-whateverfolder-2023-01-10.txt
+├── flod.txt
+├── package-lock.json
+├── package.json
+├── src
+│   ├── addProperty.tsx
+│   ├── buildDartASTfromAST.tsx
+│   ├── clearProperties.tsx
+│   ├── config
+│   │   ├── flutter-widgets.ts
+│   │   ├── index.ts
+│   │   ├── layout-props.ts
+│   │   └── text-props.ts
+│   ├── index.tsx
+│   └── utils
+│       ├── arr.js
+│       ├── camel.ts
+│       ├── converter.tsx
+│       ├── getAlignmentAxis.tsx
+│       ├── getBorder.tsx
+│       ├── getBorderRadius.tsx
+│       ├── getExpanded.tsx
+│       ├── getFlex.tsx
+│       ├── getFlexDirection.tsx
+│       ├── getFontFamily.tsx
+│       ├── getFontStyle.tsx
+│       ├── getFontWeight.tsx
+│       ├── getMargin.tsx
+│       ├── getPadding.tsx
+│       ├── getPositioned.tsx
+│       ├── getTextAlign.tsx
+│       ├── num.ts
+│       ├── pos.js
+│       ├── pushPropToWidget.tsx
+│       ├── str.js
+│       └── unit.ts
+├── test
+│   └── blah.test.tsx
+├── tsconfig.json
+└── yarn.lock
+
+4 directories, 39 files

@@ -11,3 +11,25 @@ This tool will take the React Native styling props on the left hand side editor 
 <img src="https://github.com/GeekyAnts/react-native-to-flutter/blob/main/banner/example.gif?raw=true" >
 
 
+### Run this project
+
+Clone the repo, run
+
+``` 
+git clone https://github.com/GeekyAnts/react-native-to-flutter.git 
+```
+Run the below command in root folder of the project
+
+```
+yarn start
+```
+Now to run the example, open new terminal and change your pwd to example folder
+
+```
+cd example
+```
+and then run
+```
+yarn start
+````
+Now head to ```http://localhost:1234/``` app should be working fine.
