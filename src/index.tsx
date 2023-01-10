@@ -100,15 +100,15 @@ let tab: string = '\t';
 // @ts-ignore
 
 export function createFlutterWidget(ast: any, c: number) {
-
+debugger
   if (ast?.hasOwnProperty("namedProp")) {
     if (ast.type === "constructor") {
-      if (ast.hasOwnProperty("value")) {
+      // if (ast.hasOwnProperty("value")) {
 
-        code += `${tab.repeat(c)}${ast.namedProp}:${ast.class}('${ast.value}',\n`
-      } else {
+      //   code += `${tab.repeat(c)}${ast.namedProp}:${ast.class}('${ast.value}',\n`
+      // } else {
         code += `${tab.repeat(c)}${ast.namedProp}:${ast.class}(\n`
-      }
+      //}
 
     } else if (ast.type === "Array") {
       code += `${tab.repeat(c)}${ast.namedProp}:[\n`
@@ -128,7 +128,7 @@ export function createFlutterWidget(ast: any, c: number) {
   c++
   if (ast?.hasOwnProperty("properties")) {
     Object.entries(ast?.properties).forEach(([, v]: any) => {
-      
+      debugger
       if (v.hasOwnProperty("properties") || v.hasOwnProperty("widgets")) {
         createFlutterWidget(v, c);
         code += `${tab.repeat(c)}),\n`
@@ -290,8 +290,8 @@ export const convertNativeBaseThemeToFlutterWidgets = (styles: any): string => {
               let index = myDartAST.properties.findIndex((data: any) => (data.class === "Row" || data.class === "Column"));
               if (index > -1) {
                
-                layout = {...layout,"class": myDartAST.properties[index].class}
-                myDartAST.properties.splice(index, 1);
+               // layout = {...layout,"class": myDartAST.properties[index].class}
+                // myDartAST.properties.splice(index, 1);
               } else {
                 layout = {...layout,"class": "Row"}
               }
@@ -313,8 +313,8 @@ export const convertNativeBaseThemeToFlutterWidgets = (styles: any): string => {
           if (name === "View") {
             let index = myDartAST.properties.findIndex((data: any) => (data.class === "Row" || data.class === "Column"));
             if (index > -1) {
-              layout = {...layout,"class": myDartAST.properties[index].class}
-              myDartAST.properties.splice(index, 1);
+             // layout = {...layout,"class": myDartAST.properties[index].class}
+             // myDartAST.properties.splice(index, 1);
             } else {
               layout = {...layout,"class": "Row"}
             }

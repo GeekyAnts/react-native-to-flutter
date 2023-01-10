@@ -6,21 +6,24 @@ import { pushPropToWidget } from "./pushPropToWidget";
 
 
 export const getAlignmentAxis = (styles: any, object: any, ast: any) => {
-
-  let layoutWidget: any = {...flutterWidget.Row};
+  debugger
+  let layoutWidget: any = { ...flutterWidget.Row };
   //layoutWidget.properties = [];
   if (styles.hasOwnProperty("flexDirection")) {
     if (styles.flexDirection === "column") {
 
-      layoutWidget = {...flutterWidget.Column};
+      layoutWidget = { ...flutterWidget.Column };
 
     }
   }
 
-  object = { ...object, value: object.value.replace(/flex-/, "") };
+  if (object.hasOwnProperty("value")) {
+    object = { ...object, value: object.value.replace(/flex-/, "") };
 
-  object = { ...object, value: toCamel(object.value) };
-  object = { ...object, value: object.value.replace(/-/, "") };
+    object = { ...object, value: toCamel(object.value) };
+    object = { ...object, value: object.value.replace(/-/, "") };
+  }
+
 
   let index = layoutWidget.properties.findIndex((data: any) => (data.class === object.class));
   if (index > -1) {
@@ -29,9 +32,9 @@ export const getAlignmentAxis = (styles: any, object: any, ast: any) => {
   }
 
 
-
-  layoutWidget.properties.push(object);
-
+  if (object.hasOwnProperty("value")) {
+    layoutWidget.properties.push(object);
+  }
 
   layoutWidget["namedProp"] = "child";
 

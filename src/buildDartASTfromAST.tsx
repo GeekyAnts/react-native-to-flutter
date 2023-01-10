@@ -69,8 +69,8 @@ debugger
           let index = a.properties.findIndex((data: any) => (data.class === "Row" || data.class === "Column"));
           if (index > -1) {
 
-            layout = { ...layout, "class": a.properties[index].class }
-            a.properties.splice(index, 1);
+           // layout = { ...layout, "class": a.properties[index].class }
+           // a.properties.splice(index, 1);
           } else {
             layout = { ...layout, "class": "Row" }
           }
@@ -142,36 +142,43 @@ debugger
 export function searchForDeepChildAndPush(myDartAST: any, a: any) {
   debugger
   let prop = myDartAST?.properties ?? myDartAST?.values;
-  if(prop.length > 0){
-    Object.entries(prop).forEach(([, v]: any) => {
-      
-  
-      if (v.namedProp === "child") {
-        if (v.properties.length > 0) {
-          searchForDeepChildAndPush(v, a);
-        } else {
-          pushChildToParent(v, a);
-        }
-      } if (v.namedProp === "children") {
-        
-        if(a.hasOwnProperty("namedProp")){
-          if (v.values.length > 0) {
+
+  let namedPropIndex = prop.findIndex((data: any) => (data.namedProp === "child" || data.namedProp === "children"));
+  console.log(namedPropIndex);
+  if(namedPropIndex < 0){
+    if(myDartAST.hasOwnProperty("namedProp")){
+      Object.entries(prop).forEach(([, v]: any) => {
+        debugger
+    
+        if (v.namedProp === "child") {
+          if (v.properties.length > 0) {
             searchForDeepChildAndPush(v, a);
           } else {
             pushChildToParent(v, a);
           }
-        } else {
-          v.values.push(a)
-        }
-        
-  
-      }
-    });
-
-  } else {
+        } if (v.namedProp === "children") {
+          
+          if(a.hasOwnProperty("namedProp")){
+            if (v.values.length > 0) {
+              searchForDeepChildAndPush(v, a);
+            } else {
+              pushChildToParent(v, a);
+            }
+          } else {
+            v.values.push(a)
+          }
+          
     
-    pushChildToParent(myDartAST,a)
+        } else {
+          pushChildToParent(v, a);
+        }
+      });
+  
+    } else {
+      pushChildToParent(myDartAST, a);
+    }
   }
+  
   
 }
 
