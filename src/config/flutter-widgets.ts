@@ -27,7 +27,8 @@ export const flutterWidget = {
       properties: [
        
         
-      ]
+      ],
+     
     },
 
     Text: {
