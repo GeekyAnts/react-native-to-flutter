@@ -23,6 +23,11 @@ Clone the repo, run
 git clone https://github.com/GeekyAnts/react-native-to-flutter.git
 ```
 
+Install Dependencies
+```
+yarn install
+```
+
 Run the below command in root folder of the project
 
 ```

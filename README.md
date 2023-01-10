@@ -65,7 +65,14 @@ Clone the repo, run
 
 ``` 
 git clone https://github.com/GeekyAnts/react-native-to-flutter.git 
+
 ```
+
+Install Dependencies
+```
+yarn install
+```
+
 Run the below command in root folder of the project
 
 ```
@@ -81,3 +88,12 @@ and then run
 yarn start
 ````
 Now head to ```http://localhost:1234/``` app should be working fine.
+
+
+### How to Contribute
+
+Thank you for your interest in contributing to React Native to Flutter Widgets ! We are lucky to have you 🙂 Head over to [Contribution](https://github.com/GeekyAnts/react-native-to-flutter/blob/main/CONTRIBUTION.md) Guidelines and learn how you can be a part of a wonderful, growing community.
+
+### License
+
+Licensed under the [MIT](https://github.com/GeekyAnts/react-native-to-flutter/blob/main/LICENSE) License, Copyright © 2020 GeekyAnts. See LICENSE for more information.

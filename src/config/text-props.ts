@@ -40,7 +40,7 @@ export const  textProp = {
 
       lineHeight: {
         widget: "Text",
-        "property": "lineHeight",
+        "property": "height",
         class: dartType.double,
         "partOf": {
           "class": flutterWidget.TextStyle,

@@ -8,49 +8,81 @@ import Editor from "@monaco-editor/react";
 
 //let styles: any = {
 
-  //   position:"absolute",
-  //   flexGrow:4,
-  //   minHeight:4,
-  //  width:3,
-  //   height:4,
-  //   borderRadius:4,
-  //   borderWidth:3,
-  //   borderColor:"#fcfcfc",
-  //   paddingHorizontal:30,
-  //   paddingRight:40,
-  //   paddingBottom:50,
-  //   paddingTop:40,
-  //   maxWidth:30,
-  //   minWidth:50,
-  //   maxHeight:50,
-  //   margin:30,
-  //   borderBottomWidth:1,
-  //   borderTopWidth:3,
-  //   borderLeftWidth:4,
-  //   borderRightWidth:5,
-  //   flexDirection:"column",
-  //   alignContent:"space-between",
-  //   alignItems:"stretch",
-  //   // position:"absolute",
-  //   top:10,
-  //   right:20,
-  //   bottom:30,
-  //   left:40,
+//   position:"absolute",
+//   flexGrow:4,
+//   minHeight:4,
+//  width:3,
+//   height:4,
+//   borderRadius:4,
+//   borderWidth:3,
+//   borderColor:"#fcfcfc",
+//   paddingHorizontal:30,
+//   paddingRight:40,
+//   paddingBottom:50,
+//   paddingTop:40,
+//   maxWidth:30,
+//   minWidth:50,
+//   maxHeight:50,
+//   margin:30,
+//   borderBottomWidth:1,
+//   borderTopWidth:3,
+//   borderLeftWidth:4,
+//   borderRightWidth:5,
+//   flexDirection:"column",
+//   alignContent:"space-between",
+//   alignItems:"stretch",
+//   // position:"absolute",
+//   top:10,
+//   right:20,
+//   bottom:30,
+//   left:40,
 
-  // color: "#ffffff",
-  // fontSize: 23,
-  // letterSpacing: 4,
-  // lineHeight: 4,
-  // fontStyle: "italic",
-  // fontWeight: 300,
-  // textAlign: "center",
-  // fontFamily: "abc"
+// color: "#ffffff",
+// fontSize: 23,
+// letterSpacing: 4,
+// lineHeight: 4,
+// fontStyle: "italic",
+// fontWeight: 300,
+// textAlign: "center",
+// fontFamily: "abc"
 
 //}
- let styles=( `
- <View style={{flexDirection:"column"}}>
-      
- </View>`)
+let styles = (`
+<View style={{   
+  minHeight:4,
+  width:3,
+  height:4,
+  borderRadius:4,
+  borderWidth:3,
+  borderColor:"#fcfcfc",
+  paddingHorizontal:30,
+  paddingRight:40,
+  paddingBottom:50,
+  paddingTop:40,
+  maxWidth:30,
+  minWidth:50,
+  maxHeight:50,
+  margin:30,
+  borderBottomWidth:1,
+  borderTopWidth:3,
+  borderLeftWidth:4,
+  borderRightWidth:5,
+  flexDirection:"column",
+  alignContent:"space-between",
+  alignItems:"stretch",
+}}>
+       <Text style={{
+       color: "#ffffff",
+       fontSize: 23,
+       letterSpacing: 4,
+       lineHeight: 4,
+       fontStyle: "italic",
+       fontWeight: 300,
+       textAlign: "center",
+       fontFamily: "abc"
+       }}>This Widget is Made from React Native to Flutter Tool</Text>
+</View>
+`)
 function App() {
   const [code, setCode] = useState(styles);
   const [output, setOutput]: any = useState('');
@@ -80,7 +112,7 @@ function App() {
       noSyntaxValidation: false
     })
 
-   
+
 
   }
 
@@ -118,7 +150,7 @@ function App() {
 
           <p style={{ color: "#FFFFFF" }}> Select React Native Component and add styles in the editor</p>
           <p style={{ color: "#FFFFFF", margin: 0, padding: 0 }}>React Native Component</p>
-          
+
           <div style={{ display: 'flex', height: "calc(100vh - 120px)" }}>
 
             <div style={{ flex: 1, height: "100%" }}>
