@@ -14,7 +14,8 @@ The entire checklist of which props are being already supported is [here](https:
 
 ### Working Example
 
-<img src="https://github.com/GeekyAnts/react-native-to-flutter/blob/main/banner/example.gif?raw=true" height="400" >
+<img src="https://raw.githubusercontent.com/GeekyAnts/react-native-to-flutter/main/banner/high-res-example.gif" >
+
 
 ### Folder Structure
 
@@ -62,7 +63,7 @@ The entire checklist of which props are being already supported is [here](https:
 ├── tsconfig.json
 └── yarn.lock
 
-```
+
 
 
 ### Run this project
