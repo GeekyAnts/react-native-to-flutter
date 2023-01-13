@@ -2,7 +2,7 @@ import { buildDartAST } from "./index";
 
 export function buildDartASTfromAST(expression: any, myDartAST: any, recursive: boolean = false) {
 
-debugger
+
 
   if (!recursive) {
     if (expression.children.length < 2) {
@@ -32,7 +32,7 @@ debugger
 
 
   Object.entries(expression.children).forEach(([k, v]: any) => {
-    debugger
+    
     let a: any = {};
 
     if (v.type === "JSXElement") {
@@ -88,6 +88,7 @@ debugger
 
         }
         if (name === 'Text') {
+          
           a = { ...a, id: k, value: v.children[0]?.value ?? '' };
         } else {
           a = { ...a, id: k };
@@ -112,7 +113,7 @@ debugger
           }
 
         } else {
-          debugger
+          
           searchForDeepChildAndPush(myDartAST, a);
 
           // myDartAST?.properties.push({ "namedProp": "child", ...a });
@@ -140,15 +141,16 @@ debugger
 }
 
 export function searchForDeepChildAndPush(myDartAST: any, a: any) {
-  debugger
+  
   let prop = myDartAST?.properties ?? myDartAST?.values;
 
   let namedPropIndex = prop.findIndex((data: any) => (data.namedProp === "child" || data.namedProp === "children"));
   console.log(namedPropIndex);
   if(namedPropIndex < 0){
+    
     if(myDartAST.hasOwnProperty("namedProp")){
       Object.entries(prop).forEach(([, v]: any) => {
-        debugger
+        
     
         if (v.namedProp === "child") {
           if (v.properties.length > 0) {
@@ -177,6 +179,8 @@ export function searchForDeepChildAndPush(myDartAST: any, a: any) {
     } else {
       pushChildToParent(myDartAST, a);
     }
+  } else {
+    searchForContainer(myDartAST,a);
   }
   
   
@@ -192,5 +196,45 @@ export function pushChildToParent(v: any, a: any) {
     }
 
   }
+}
+
+
+function searchForContainer(_ast: any,widget:any) {
+  let prop = _ast?.properties ?? _ast?.values;
+
+  if (prop) {
+    Object.entries(prop).forEach(([, v]: any) => {
+      
+      if (v.class === "Container") {
+        if(v.hasOwnProperty("properties")){
+          if(v.properties.length>0){
+            let childIndex = v.properties.findIndex((data:any)=>data.namedProp==="child"||data.namedProp==="children");
+            if(childIndex>-1){
+              let index = v.properties[childIndex].properties.findIndex((data:any)=>data.namedProp==="children");
+              if(index >-1){
+                if(v.properties[childIndex].properties[index].hasOwnProperty("namedProp")){
+                
+                  v.properties[childIndex].properties[index].values.push(widget)
+                 
+                }
+              }
+              else {
+                v.properties[childIndex].properties.push({ namedProp: "children", type: "Array", values: [widget] });
+              }
+              
+            }
+          } else {
+            v.properties.push(widget)
+          }
+       
+          
+        }
+        
+      } else {
+        searchForContainer(v,widget);
+      }
+    });
+  }
+
 }
 

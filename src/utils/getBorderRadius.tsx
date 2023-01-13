@@ -4,7 +4,7 @@ import { flutterWidget } from "../config/flutter-widgets";
 
 
 export const getBorderRadius = (styles: any, object: any) => {
-debugger
+
   object.properties = [];
 
   if (styles.hasOwnProperty("borderRadius")) {
