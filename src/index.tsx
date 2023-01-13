@@ -100,7 +100,7 @@ let tab: string = '\t';
 // @ts-ignore
 
 export function createFlutterWidget(ast: any, c: number) {
-debugger
+
   if (ast?.hasOwnProperty("namedProp")) {
     if (ast.type === "constructor") {
       // if (ast.hasOwnProperty("value")) {
@@ -128,7 +128,7 @@ debugger
   c++
   if (ast?.hasOwnProperty("properties")) {
     Object.entries(ast?.properties).forEach(([, v]: any) => {
-      debugger
+      
       if (v.hasOwnProperty("properties") || v.hasOwnProperty("widgets")) {
         createFlutterWidget(v, c);
         code += `${tab.repeat(c)}),\n`
@@ -286,7 +286,7 @@ export const convertNativeBaseThemeToFlutterWidgets = (styles: any): string => {
             console.log(myDartAST);
             
             if (name === "View") {
-              debugger;
+              
               let index = myDartAST.properties.findIndex((data: any) => (data.class === "Row" || data.class === "Column"));
               if (index > -1) {
                
