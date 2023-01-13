@@ -4,7 +4,7 @@ export function addProperty(myObject: any, val: any, prop: any, style: any, ast:
   let newProp: any;
   if (styleSystem.hasOwnProperty(prop)) {
     if (myObject.type === "constructor" || myObject.type === "enum") {
-      debugger;
+     
       newProp = { ...styleSystem[prop].class, namedProp: styleSystem[prop].property };
       if (typeof newProp.value === "object") {
         newProp.value = { ...newProp.value, value: val };

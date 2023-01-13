@@ -88,7 +88,7 @@ export function buildDartASTfromAST(expression: any, myDartAST: any, recursive: 
 
         }
         if (name === 'Text') {
-          debugger
+          
           a = { ...a, id: k, value: v.children[0]?.value ?? '' };
         } else {
           a = { ...a, id: k };
@@ -146,12 +146,11 @@ export function searchForDeepChildAndPush(myDartAST: any, a: any) {
 
   let namedPropIndex = prop.findIndex((data: any) => (data.namedProp === "child" || data.namedProp === "children"));
   console.log(namedPropIndex);
-  debugger
   if(namedPropIndex < 0){
-    debugger
+    
     if(myDartAST.hasOwnProperty("namedProp")){
       Object.entries(prop).forEach(([, v]: any) => {
-        debugger
+        
     
         if (v.namedProp === "child") {
           if (v.properties.length > 0) {
@@ -189,7 +188,7 @@ export function searchForDeepChildAndPush(myDartAST: any, a: any) {
 
 export function pushChildToParent(v: any, a: any) {
   if (v.type == "constructor") {
-   debugger
+   
     if (v.class === 'Row' || v.class === 'Column') {
       v.properties.push({ namedProp: "children", type: "Array", values: [a] });
     } else {
@@ -205,7 +204,7 @@ function searchForContainer(_ast: any,widget:any) {
 
   if (prop) {
     Object.entries(prop).forEach(([, v]: any) => {
-      debugger
+      
       if (v.class === "Container") {
         if(v.hasOwnProperty("properties")){
           if(v.properties.length>0){

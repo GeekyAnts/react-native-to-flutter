@@ -2,7 +2,7 @@ import { flutterWidget } from "../config/flutter-widgets";
 import { pushPropToWidget } from "./pushPropToWidget";
 
 export const getFlexDirection = (styles: any, object: any={}, ast: any) => {
-debugger
+
     let layoutWidget: any = { ...flutterWidget.Row };
     layoutWidget.properties = [];
     if (styles.hasOwnProperty("flexDirection")) {

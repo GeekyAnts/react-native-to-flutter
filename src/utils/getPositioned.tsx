@@ -4,7 +4,7 @@ import { dartType } from "../config/layout-props";
 
 
 export const getPositioned = (styles: any, object: any, ast?: any) => {
-  debugger
+  
   object.properties = [];
   if (styles.hasOwnProperty("position")) {
     if (styles["position"] === "absolute") {
