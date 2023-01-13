@@ -13,7 +13,7 @@ This tool will take the React Native styling props on the left hand side editor 
 The entire checklist of which props are being already supported is [here](https://github.com/GeekyAnts/nativebase-theme-to-flutter/blob/main/README_API_CHECKLIST.md) 
 
 ### Working Example
-<img src="https://github.com/GeekyAnts/react-native-to-flutter/blob/main/banner/example.gif?raw=true" >
+<img src="https://raw.githubusercontent.com/GeekyAnts/react-native-to-flutter/main/banner/high-res-example.gif" >
 
 
 ### Run this project
