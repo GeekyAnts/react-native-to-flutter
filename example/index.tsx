@@ -5,6 +5,8 @@ import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { useState } from 'react';
 import Editor from "@monaco-editor/react";
+// @ts-ignore
+import flutter from '../example/img/flutter.png'
 
 //let styles: any = {
 
@@ -156,14 +158,15 @@ function App() {
   return (
 
     <div style={{ height: '100vh' }}>
-      
-      <div style={{ display: "flex", alignItems: "center", backgroundColor: "#000", padding: "20px" }}>
+      <div className='eclipse1'></div>
+      <div className='eclipse2'></div>
+      <div style={{ display: "flex", alignItems: "center", backgroundColor: "#000", padding: "5px" , position:"relative"}}>
        
-        <div style={{ flex: 1 }}></div>
+        <div style={{ flex: 1,marginLeft:"30px",color:"#fff" }}><h3>RN2Flutter</h3></div>
         <div style={{ flex: 1 ,justifyContent:"end",display:"flex",alignItems:"center",marginRight:"30px"}}>
-          <a href="https://github.com/GeekyAnts/react-native-to-flutter/issues/new" style={{ justifySelf: "end",  color: "#fff", fontWeight: "bolder", padding: "10px" }}>Report an issue</a>
-          <a href='https://github.com/GeekyAnts/react-native-to-flutter/blob/main/README_API_CHECKLIST.md' style={{ justifySelf: "end", color: "#fff", fontWeight: "bolder", paddingRight: "10px" }}>Supported Props</a>
-          <a style={{ justifySelf: "end",  color: "#000", fontWeight: "bolder", padding: "10px" ,backgroundColor:"#fff",borderRadius:"5px" }} href="https://github.com/GeekyAnts/react-native-to-flutter"> GitHub</a>
+          <a href="https://github.com/GeekyAnts/react-native-to-flutter/issues/new" style={{ justifySelf: "end",  color: "#fff",  paddingRight: "30px" }}>Report an issue</a>
+          <a href='https://github.com/GeekyAnts/react-native-to-flutter/blob/main/README_API_CHECKLIST.md' style={{ justifySelf: "end", color: "#fff",  paddingRight: "50px" }}>Supported Props</a>
+          <a style={{ justifySelf: "end",  color: "#000", fontWeight: "bolder", padding: "5px 15px" ,backgroundColor:"#fff",borderRadius:"5px",display:"flex",justifyContent:"center",alignItems:"center" }} href="https://github.com/GeekyAnts/react-native-to-flutter"><span><img height="20px" src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'></img></span> GitHub</a>
         </div>
 
       </div>
@@ -180,11 +183,13 @@ function App() {
           }}
         >
 
-<div> <h3 style={{ color: "#FFFFFF", paddingBottom: "5px" ,textAlign:"center" ,margin:"auto",maxWidth:"350px",marginBottom:"20px", marginTop:"10px", }}>React Native Component to Flutter Widgets <span style={{color:"#858181"}} >(Alpha)</span> </h3></div>
-
+<div> <h3 style={{ color: "#FFFFFF",textAlign:"center" ,margin:"auto",marginTop:"20px",marginBottom:"20px" }}>React Native Component to Flutter Widgets <span style={{color:"#858181"}} >(Alpha)</span> </h3></div>
+        <p style={{margin:"auto",textAlign:"center",maxWidth:"570px",color:"#858181",marginBottom:"20px"}}>Helpful for developers who are familiar with React Native but new to Flutter, as it allows them to leverage their knowledge of React Native styling and apply it to Flutter.</p>
           <div style={{ display: 'flex', height: "calc(100vh - 180px)" }}>
 
-            <div style={{ flex: 1, height: "100%",marginLeft:"50px" }}>
+            <div style={{ flex: 1, height: "100%",marginLeft:"50px",textAlign: "center" }}>
+              <img style={{height:"20px",margin:"auto"}} src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png'></img>
+              
               <p style={{ marginBottom:"20px",padding: 0,textAlign:"center",color:"#B6B6B6" }}>React Native Component</p>
               <div style={{height:"90%",border:"1px solid #cfcfcf47"}}>
                 <Editor
@@ -216,7 +221,8 @@ function App() {
 
             </div>
             <div style={{ padding: '4px' }}></div>
-            <div style={{ flex: 1, height: "100%" }}>
+            <div style={{ flex: 1, height: "100%" ,textAlign: "center"}}>
+            <img style={{height:"20px",margin:"auto"}} src={flutter}></img>
               <p style={{ marginBottom:"20px",padding: 0,textAlign:"center",color:"#B6B6B6" }}>Flutter Widget</p>
               <div style={{height:"90%",border:"1px solid #cfcfcf47",marginRight:"50px"}}>
               <Editor
