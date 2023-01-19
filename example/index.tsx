@@ -177,7 +177,7 @@ function App() {
       <div className='eclipse2'></div>
       <div className='playground-navbar'>
 
-        <div style={{ flex: 1, marginLeft: "30px", color: "#fff" }}><h3>RN2Flutter</h3></div>
+        <div style={{ flex: 1, marginLeft: "30px", color: "#fff" }}><h3 className='logoName'>RN2Flutter</h3></div>
         <div className='menu-wrapper' >
           <a className='issue' href="https://github.com/GeekyAnts/react-native-to-flutter/issues/new" style={{ justifySelf: "end", color: "#fff", paddingRight: "30px" }}>Report an issue</a>
           <a className='props' href='https://github.com/GeekyAnts/react-native-to-flutter/blob/main/README_API_CHECKLIST.md' style={{ justifySelf: "end", color: "#fff", paddingRight: "50px" }}>Supported Props</a>
