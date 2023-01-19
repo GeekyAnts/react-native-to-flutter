@@ -114,37 +114,52 @@ function App() {
     setOutput(convertNativeBaseThemeToFlutterWidgets(code));
   };
 
-  function handleEditorWillMount(monaco) {
-    // here is the monaco instance
-    // do something before editor is mounted
-    monaco.languages.typescript.javascriptDefaults.setEagerModelSync(true);
-    monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
-      target: monaco.languages.typescript.ScriptTarget.ES2016,
-      allowNonTsExtensions: true,
-      moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
-      module: monaco.languages.typescript.ModuleKind.CommonJS,
-      noEmit: true,
-      typeRoots: ["node_modules/@types"]
-    });
-    monaco.editor.defineTheme('myTheme', theme)
-    monaco.languages.typescript.typescriptDefaults.addExtraLib(
-      `export declare function next() : string`,
-      'node_modules/@types/external/index.d.ts');
-    monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
-      noSemanticValidation: false,
-      noSyntaxValidation: false
-    })
+  const editorRef: any = React.useRef(null);
+  var myMonaco: any;
+
+  // function handleEditorWillMount(monaco) {
+  //   // here is the monaco instance
+  //   // do something before editor is mounted
+  //   myMonaco = monaco;
+  //   monaco.languages.typescript.javascriptDefaults.setEagerModelSync(true);
+  //   monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+  //     target: monaco.languages.typescript.ScriptTarget.ES2016,
+  //     allowNonTsExtensions: true,
+  //     moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
+  //     module: monaco.languages.typescript.ModuleKind.CommonJS,
+  //     noEmit: true,
+  //     typeRoots: ["node_modules/@types"]
+  //   });
+  //   monaco.editor.defineTheme('myTheme', theme)
+  //   debugger
+
+  // monaco.editor.EditorOptions.automaticLayout;
+  //   monaco.languages.typescript.typescriptDefaults.addExtraLib(
+  //     `export declare function next() : string`,
+  //     'node_modules/@types/external/index.d.ts');
+  //   monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
+  //     noSemanticValidation: false,
+  //     noSyntaxValidation: false
+  //   })
 
 
 
+  // }
+
+  function handleEditorDidMount(editor, monaco) {
+    // here is the editor instance
+    // you can store it in `useRef` for further usage
+    editorRef.current = monaco;
   }
 
-  React.useEffect(() => {
-    console.log(output);
-  }, [output])
+
 
   React.useEffect(() => {
     setOutput('')
+    window.addEventListener("resize", () => {
+      debugger
+      console.log(editorRef.current);
+    });
 
   }, []);
   React.useEffect(() => {
@@ -160,18 +175,18 @@ function App() {
     <div style={{ height: '100vh' }}>
       <div className='eclipse1'></div>
       <div className='eclipse2'></div>
-      <div style={{ display: "flex", alignItems: "center", backgroundColor: "#000", padding: "5px" , position:"relative"}}>
-       
-        <div style={{ flex: 1,marginLeft:"30px",color:"#fff" }}><h3>RN2Flutter</h3></div>
-        <div style={{ flex: 1 ,justifyContent:"end",display:"flex",alignItems:"center",marginRight:"30px"}}>
-          <a href="https://github.com/GeekyAnts/react-native-to-flutter/issues/new" style={{ justifySelf: "end",  color: "#fff",  paddingRight: "30px" }}>Report an issue</a>
-          <a href='https://github.com/GeekyAnts/react-native-to-flutter/blob/main/README_API_CHECKLIST.md' style={{ justifySelf: "end", color: "#fff",  paddingRight: "50px" }}>Supported Props</a>
-          <a style={{ justifySelf: "end",  color: "#000", fontWeight: "bolder", padding: "5px 15px" ,backgroundColor:"#fff",borderRadius:"5px",display:"flex",justifyContent:"center",alignItems:"center" }} href="https://github.com/GeekyAnts/react-native-to-flutter"><span><img height="20px" src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'></img></span> GitHub</a>
+      <div className='playground-navbar'>
+
+        <div style={{ flex: 1, marginLeft: "30px", color: "#fff" }}><h3>RN2Flutter</h3></div>
+        <div className='menu-wrapper' >
+          <a href="https://github.com/GeekyAnts/react-native-to-flutter/issues/new" style={{ justifySelf: "end", color: "#fff", paddingRight: "30px" }}>Report an issue</a>
+          <a href='https://github.com/GeekyAnts/react-native-to-flutter/blob/main/README_API_CHECKLIST.md' style={{ justifySelf: "end", color: "#fff", paddingRight: "50px" }}>Supported Props</a>
+          <a style={{ justifySelf: "end", color: "#000", fontWeight: "bolder", padding: "5px 15px", backgroundColor: "#fff", borderRadius: "5px", display: "flex", justifyContent: "center", alignItems: "center" }} href="https://github.com/GeekyAnts/react-native-to-flutter"><span><img height="20px" src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'></img></span> GitHub</a>
         </div>
 
       </div>
 
-      <div style={{ flexDirection: 'row', display: 'flex', }}>
+      <div style={{ flexDirection: 'row', display: 'flex', height:"100vh"}}>
 
         <div
           style={{
@@ -180,24 +195,27 @@ function App() {
             padding: 8,
             justifyContent: 'center',
             height: '100%',
+
           }}
         >
 
-<div> <h3 style={{ color: "#FFFFFF",textAlign:"center" ,margin:"auto",marginTop:"20px",marginBottom:"20px" }}>React Native Component to Flutter Widgets <span style={{color:"#858181"}} >(Alpha)</span> </h3></div>
-        <p style={{margin:"auto",textAlign:"center",maxWidth:"570px",color:"#858181",marginBottom:"20px"}}>Helpful for developers who are familiar with React Native but new to Flutter, as it allows them to leverage their knowledge of React Native styling and apply it to Flutter.</p>
-          <div style={{ display: 'flex', height: "calc(100vh - 180px)" }}>
+          <div> <h3 className='playground-heading '>React Native Component to Flutter Widgets <span style={{ color: "#858181" }} >(Alpha)</span> </h3></div>
+          <p className='playground-subheading '>Helpful for developers who are familiar with React Native but new to Flutter, as it allows them to leverage their knowledge of React Native styling and apply it to Flutter.</p>
+          <div style={{ display: 'flex' }}>
 
-            <div style={{ flex: 1, height: "100%",marginLeft:"50px",textAlign: "center" }}>
-              <img style={{height:"20px",margin:"auto"}} src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png'></img>
-              
-              <p style={{ marginBottom:"20px",padding: 0,textAlign:"center",color:"#B6B6B6" }}>React Native Component</p>
-              <div style={{height:"90%",border:"1px solid #cfcfcf47"}}>
+            <div style={{ flex: 1, marginLeft: "10px", textAlign: "center" }}>
+              <img style={{ height: "20px", margin: "auto" }} src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png'></img>
+
+              <p style={{ marginBottom: "20px", padding: 0, textAlign: "center", color: "#B6B6B6" }}>React Native Component</p>
+              <div style={{height:"calc(100vh - 330px)", border: "1px solid #cfcfcf47" }}>
                 <Editor
-              
+                  options={{
+                    automaticLayout: true
+                  }}
                   defaultLanguage="javascript"
                   defaultValue={code}
 
-                  beforeMount={handleEditorWillMount}
+                  onMount={handleEditorDidMount}
                   onValidate={(e) => {
 
                     if (e.length > 1) {
@@ -221,23 +239,28 @@ function App() {
 
             </div>
             <div style={{ padding: '4px' }}></div>
-            <div style={{ flex: 1, height: "100%" ,textAlign: "center"}}>
-            <img style={{height:"20px",margin:"auto"}} src={flutter}></img>
-              <p style={{ marginBottom:"20px",padding: 0,textAlign:"center",color:"#B6B6B6" }}>Flutter Widget</p>
-              <div style={{height:"90%",border:"1px solid #cfcfcf47",marginRight:"50px"}}>
-              <Editor
-              
-                theme="vs-dark"
-                defaultLanguage="dart"
-                value={output}
-                defaultValue={output}
-              />
-            </div>
+            <div style={{ flex: 1,  textAlign: "center" }}>
+              <img style={{ height: "20px", margin: "auto" }} src={flutter}></img>
+              <p style={{ marginBottom: "20px", padding: 0, textAlign: "center", color: "#B6B6B6" }}>Flutter Widget</p>
+              <div className='editor-container' style={{marginRight: "10px" }}>
+                <Editor
+                  width={"auto"}
+                  options={{
+                    automaticLayout: true
+                  }}
+                  theme="vs-dark"
+                  defaultLanguage="dart"
+                  value={output}
+                  defaultValue={output}
+                />
+              </div>
             </div>
 
 
           </div>
-
+          <div className='playground-footer'>
+            <p>Built with <span>❤</span> <a style={{color:"inherit"}} href='https://geekyants.com/'>@GeekyAnts</a></p>
+          </div>
         </div>
       </div>
     </div>
