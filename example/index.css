@@ -111,8 +111,20 @@
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  .playground-navbar .menu-wrapper {
+ 
+
+   /* .menu-wrapper , a:nth-last-child(0) {
     display: none;
+  } */
+  .issue {
+    display: none;
+  }
+  .props {
+    display: none;
+  }
+
+  .github{
+    display: block;
   }
 
   .eclipse2 {
@@ -123,8 +135,12 @@
     font-size: 16px;
   }
   .playground-subheading {
-    font-size: 10px;
-  }
+  margin: auto;
+  text-align: center;
+  max-width: 570px;
+  color: #858181;
+  margin-bottom: 20px
+}
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
