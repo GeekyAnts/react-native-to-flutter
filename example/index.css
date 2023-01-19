@@ -53,7 +53,7 @@
   display: flex;
   align-items: center;
   background-color: #000;
-  padding: 5px;
+  padding:10px 0px;
   position: relative
 }
 
@@ -84,6 +84,10 @@
 
 .playground-footer>p>span {
   color: #CF2F2F
+}
+
+.logoName{
+  margin: 0;
 }
 
 .editor-container {
