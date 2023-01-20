@@ -177,7 +177,7 @@ function App() {
 
   return (
 
-    <div style={{ height: '100vh' }}>
+    <div style={{  position:"relative",overflow:"hidden",height:"100vh"}}>
       <div className='eclipse1'></div>
       <div className='eclipse2'></div>
       <div className='playground-footer'>
@@ -194,7 +194,7 @@ function App() {
 
       </div>
 
-      <div style={{ flexDirection: 'row', display: 'flex', height: "100vh",zIndex:"2",position:"relative" }}>
+      <div style={{ flexDirection: 'row', display: 'flex',zIndex:"2",position:"relative",overflow:"hidden" }}>
 
         <div
           style={{
@@ -202,7 +202,7 @@ function App() {
            
             padding: 8,
             justifyContent: 'center',
-            height: '100%',
+           
 
           }}
         >
