@@ -15,6 +15,10 @@
   box-shadow: 0 0 10px #888;
 }
 
+.switch-wrapper{
+  display: none;
+}
+
 .ribbon a {
   border: 1px solid #faa;
   color: #fff;
@@ -35,6 +39,7 @@
   background: #54C5F8;
   filter: blur(150px);
   left: -188px;
+  z-index: 1;
 }
 
 .eclipse2 {
@@ -48,13 +53,22 @@
   background: #54C5F8;
   filter: blur(150px);
 }
+.switch-code{
+  display: flex;
+  border: 1px solid #cfcfcf;
+  font-size: 12px;
+  border-radius: 60px;
+}
+
+
 
 .playground-navbar {
   display: flex;
   align-items: center;
   background-color: #000;
   padding:10px 0px;
-  position: relative
+  position: relative;
+  z-index: 2;
 }
 
 .menu-wrapper {
@@ -91,7 +105,7 @@
 }
 
 .editor-container {
-  height: calc(100vh - 330px);
+  height: calc(100vh - 295px);
   border: 1px solid #cfcfcf47;
 }
 
@@ -136,15 +150,24 @@
   }
 
   .playground-heading {
-    font-size: 16px;
+    font-size: 14px;
   }
   .playground-subheading {
-  margin: auto;
-  text-align: center;
-  max-width: 570px;
-  color: #858181;
-  margin-bottom: 20px
+  display: none;
 }
+.switch-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  
+}
+.active-code{
+  color: #000000;
+  background-color: #fff;
+  border-radius: 60px;
+}
+
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */

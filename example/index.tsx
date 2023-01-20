@@ -110,6 +110,7 @@ function App() {
   const [code, setCode] = useState(styles);
   const [output, setOutput]: any = useState('');
   const [error, setError]: any = useState(false)
+  const [isActiveReact,setIsActiveReact]:any = useState(true)
   const transpileCode = (code: string) => {
     setOutput(convertNativeBaseThemeToFlutterWidgets(code));
   };
@@ -175,23 +176,26 @@ function App() {
     <div style={{ height: '100vh' }}>
       <div className='eclipse1'></div>
       <div className='eclipse2'></div>
+      <div className='playground-footer'>
+            <p>Built with <span>❤</span> <a style={{ color: "inherit" }} href='https://geekyants.com/'>@GeekyAnts</a></p>
+          </div>
       <div className='playground-navbar'>
 
         <div style={{ flex: 1, marginLeft: "30px", color: "#fff" }}><h3 className='logoName'>RN2Flutter</h3></div>
         <div className='menu-wrapper' >
           <a className='issue' href="https://github.com/GeekyAnts/react-native-to-flutter/issues/new" style={{ justifySelf: "end", color: "#fff", paddingRight: "30px" }}>Report an issue</a>
           <a className='props' href='https://github.com/GeekyAnts/react-native-to-flutter/blob/main/README_API_CHECKLIST.md' style={{ justifySelf: "end", color: "#fff", paddingRight: "50px" }}>Supported Props</a>
-          <a  className='github' style={{ justifySelf: "end", color: "#000", fontWeight: "bolder", padding: "5px 15px", backgroundColor: "#fff", borderRadius: "5px", display: "flex", justifyContent: "center", alignItems: "center" }} href="https://github.com/GeekyAnts/react-native-to-flutter"><span><img height="20px" src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'></img></span> GitHub</a>
+          <a className='github' style={{ justifySelf: "end", color: "#000", fontWeight: "bolder", padding: "5px 15px", backgroundColor: "#fff", borderRadius: "5px", display: "flex", justifyContent: "center", alignItems: "center" }} href="https://github.com/GeekyAnts/react-native-to-flutter"><span><img height="20px" src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'></img></span> GitHub</a>
         </div>
 
       </div>
 
-      <div style={{ flexDirection: 'row', display: 'flex', height:"100vh"}}>
+      <div style={{ flexDirection: 'row', display: 'flex', height: "100vh",zIndex:"2",position:"relative" }}>
 
         <div
           style={{
             flex: 1,
-            backgroundColor: '#1B1A1A',
+           
             padding: 8,
             justifyContent: 'center',
             height: '100%',
@@ -201,18 +205,28 @@ function App() {
 
           <div> <h3 className='playground-heading '>React Native Component to Flutter Widgets <span style={{ color: "#858181" }} >(Alpha)</span> </h3></div>
           <p className='playground-subheading '>Helpful for developers who are familiar with React Native but new to Flutter, as it allows them to leverage their knowledge of React Native styling and apply it to Flutter.</p>
+          <div className='switch-wrapper' >
+            <div className='switch-code'>
+              <div  onClick={()=>{setIsActiveReact(!isActiveReact);console.log("hello")}} className={`${isActiveReact ? 'active-code':''}`} style={{flex:"1 1 0px" ,padding :"5px",whiteSpace:"nowrap",flexBasis:"100%",width:"100.00px",textAlign:"center",color:`${isActiveReact ?'#000':"#fff"}`}}>React Native</div>
+              <div onClick={()=>{setIsActiveReact(!isActiveReact);console.log("hello")}} className={`${!isActiveReact ? 'active-code':''}`} style={{flex:"1 1 0px",padding:"5px",flexBasis:"100%",width:"100.00px",textAlign:"center",color:`${!isActiveReact ?'#000':"#fff"}`}}>Flutter</div>
+
+            </div>
+          </div>
+
           <div style={{ display: 'flex' }}>
 
-            <div style={{ flex: 1, marginLeft: "10px", textAlign: "center" }}>
+          {isActiveReact? <div style={{ flex: 1, marginLeft: "10px", textAlign: "center" }}>
               <img style={{ height: "20px", margin: "auto" }} src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png'></img>
 
               <p style={{ marginBottom: "20px", padding: 0, textAlign: "center", color: "#B6B6B6" }}>React Native Component</p>
-              <div style={{height:"calc(100vh - 330px)", border: "1px solid #cfcfcf47" }}>
-                <Editor
+              <div className="editor-container">
+              <Editor
                   options={{
                     automaticLayout: true
                   }}
-                  defaultLanguage="javascript"
+                  theme="vs-dark"
+                 defaultLanguage="dart"
+                  
                   defaultValue={code}
 
                   onMount={handleEditorDidMount}
@@ -234,33 +248,33 @@ function App() {
 
                   }}
                 />
+                
               </div>
 
 
-            </div>
+            </div>:<div></div>}
             <div style={{ padding: '4px' }}></div>
-            <div style={{ flex: 1,  textAlign: "center" }}>
+            {!isActiveReact ? <div style={{ flex: 1, textAlign: "center" }}>
               <img style={{ height: "20px", margin: "auto" }} src={flutter}></img>
               <p style={{ marginBottom: "20px", padding: 0, textAlign: "center", color: "#B6B6B6" }}>Flutter Widget</p>
-              <div className='editor-container' style={{marginRight: "10px" }}>
+               <div className='editor-container' style={{ marginRight: "10px" }}>
                 <Editor
-                  width={"auto"}
-                  options={{
-                    automaticLayout: true
-                  }}
-                  theme="vs-dark"
-                  defaultLanguage="dart"
-                  value={output}
-                  defaultValue={output}
-                />
+                 
+                 options={{
+                   automaticLayout: true
+                 }}
+                 theme="vs-dark"
+                 defaultLanguage="dart"
+                 value={output}
+                 defaultValue={output}
+               />
+                
               </div>
-            </div>
+            </div>:<div></div>}
 
 
           </div>
-          <div className='playground-footer'>
-            <p>Built with <span>❤</span> <a style={{color:"inherit"}} href='https://geekyants.com/'>@GeekyAnts</a></p>
-          </div>
+          
         </div>
       </div>
     </div>
