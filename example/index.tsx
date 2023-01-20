@@ -111,6 +111,7 @@ function App() {
   const [output, setOutput]: any = useState('');
   const [error, setError]: any = useState(false)
   const [isActiveReact,setIsActiveReact]:any = useState(true)
+  const [isMobile,setIsMobile]:any = useState(false)
   const transpileCode = (code: string) => {
     setOutput(convertNativeBaseThemeToFlutterWidgets(code));
   };
@@ -157,10 +158,13 @@ function App() {
 
   React.useEffect(() => {
     setOutput('')
-    window.addEventListener("resize", () => {
-      debugger
-      console.log(editorRef.current);
-    });
+    debugger
+   console.log(window.innerHeight);
+   if(window.innerWidth <=600){
+    setIsMobile(true);
+   } else {
+    setIsMobile(false);
+   }
 
   }, []);
   React.useEffect(() => {
@@ -215,62 +219,9 @@ function App() {
 
           <div style={{ display: 'flex' }}>
 
-          {isActiveReact? <div style={{ flex: 1, marginLeft: "10px", textAlign: "center" }}>
-              <img style={{ height: "20px", margin: "auto" }} src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png'></img>
-
-              <p style={{ marginBottom: "20px", padding: 0, textAlign: "center", color: "#B6B6B6" }}>React Native Component</p>
-              <div className="editor-container">
-              <Editor
-                  options={{
-                    automaticLayout: true
-                  }}
-                  theme="vs-dark"
-                 defaultLanguage="dart"
-                  
-                  defaultValue={code}
-
-                  onMount={handleEditorDidMount}
-                  onValidate={(e) => {
-
-                    if (e.length > 1) {
-
-                      setError(true);
-                    } else {
-                      setError(false);
-                    }
-                  }}
-                  onChange={(e: string) => {
-                    if (!error) {
-                      setCode(e)
-                      setOutput('')
-                    }
-
-
-                  }}
-                />
-                
-              </div>
-
-
-            </div>:<div></div>}
+          {isMobile ?  isActiveReact? reactEditor():<div></div>:reactEditor()}
             <div style={{ padding: '4px' }}></div>
-            {!isActiveReact ? <div style={{ flex: 1, textAlign: "center" }}>
-              <img style={{ height: "20px", margin: "auto" }} src={flutter}></img>
-              <p style={{ marginBottom: "20px", padding: 0, textAlign: "center", color: "#B6B6B6" }}>Flutter Widget</p>
-               <div className='editor-container' style={{ marginRight: "10px" }}>
-                <Editor
-                 
-                 options={{
-                   automaticLayout: true
-                 }}
-                 theme="vs-dark"
-                 defaultLanguage="dart"
-                 value={output}
-                 defaultValue={output}
-               />
-                
-              </div>
-            </div>:<div></div>}
+            {isMobile ? !isActiveReact ? flutterEditor():<div></div>:flutterEditor()}
 
 
           </div>
@@ -279,6 +230,65 @@ function App() {
       </div>
     </div>
   );
+
+  function flutterEditor(): string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined {
+    return <div style={{ flex: 1, textAlign: "center" }}>
+      <img style={{ height: "20px", margin: "auto" }} src={flutter}></img>
+      <p style={{ marginBottom: "20px", padding: 0, textAlign: "center", color: "#B6B6B6" }}>Flutter Widget</p>
+      <div className='editor-container' style={{ marginRight: "10px" }}>
+        <Editor
+
+          options={{
+            automaticLayout: true
+          }}
+          theme="vs-dark"
+          defaultLanguage="dart"
+          value={output}
+          defaultValue={output} />
+
+      </div>
+    </div>;
+  }
+
+  function reactEditor(): string | number | boolean | {} | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactNodeArray | React.ReactPortal | null | undefined {
+    return <div style={{ flex: 1, marginLeft: "10px", textAlign: "center" }}>
+      <img style={{ height: "20px", margin: "auto" }} src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png'></img>
+
+      <p style={{ marginBottom: "20px", padding: 0, textAlign: "center", color: "#B6B6B6" }}>React Native Component</p>
+      <div className="editor-container">
+        <Editor
+          options={{
+            automaticLayout: true
+          }}
+          theme="vs-dark"
+          defaultLanguage="dart"
+
+          defaultValue={code}
+
+          onMount={handleEditorDidMount}
+          onValidate={(e) => {
+
+            if (e.length > 1) {
+
+              setError(true);
+            } else {
+              setError(false);
+            }
+          } }
+          onChange={(e: string) => {
+            if (!error) {
+              setCode(e);
+              setOutput('');
+            }
+
+
+          } } />
+
+      </div>
+
+
+    </div>;
+  }
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
